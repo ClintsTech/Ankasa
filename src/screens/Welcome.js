@@ -20,7 +20,7 @@ const ENTRIES1 = [
     }
 ]
 
-const Welcome = () => {
+const Welcome = ({ navigation }) => {
 
     const [activeSlide, setActiveSlide] = React.useState(0);
     const [entries, setEntries] = React.useState([]);
@@ -74,7 +74,7 @@ const Welcome = () => {
                         <Text style={{color: 'white', margin: '50%'}}>Create My Account</Text>
                     </Button>
 
-                    <Button mode='outlined' style={{justifyContent: 'center', borderRadius: 10,height: 60, marginTop: 20}}>
+                    <Button onPress={() => navigation.navigate("Login")} mode='outlined' style={{justifyContent: 'center', borderRadius: 10,height: 60, marginTop: 20}}>
                         <Text style={{color: '#2395FF', margin: '50%'}}>Sign In</Text>
                     </Button>
                 </View>

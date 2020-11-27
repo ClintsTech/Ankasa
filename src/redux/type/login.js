@@ -4,3 +4,7 @@ export const LOGIN_FAILED = "LOGIN_FAILED"
 export const LOGIN_BY_TOUCH_ID = "LOGIN_BY_TOUCH_ID"
 export const LOGIN_BY_GOOGLE = "LOGIN_BY_GOOGLE"
 export const LOGIN_BY_FACEBOOK = "LOGIN_BY_FACEBOOK"
+export const LOGOUT = 'LOGOUT'
+export const IS_ADMIN = 'IS_ADMIN'
+export const IS_USER = 'IS_USER'
+export const TOKEN_DEVICE = 'TOKEN_DEVICE'
