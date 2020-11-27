@@ -15,7 +15,7 @@ const MainNavigator = () => {
 
     return (
         <NavigationContainer>
-            {isLogin ? (
+            {!isLogin ? (
                 <PrivateRoute />
             ) : (
                 <PublicRoute />

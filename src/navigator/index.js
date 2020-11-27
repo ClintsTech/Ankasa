@@ -6,7 +6,10 @@ import Welcome from '../screens/Welcome'
 import Login from '../screens/Login'
 import MyBooking from '../screens/MyBooking'
 import Home from '../screens/Home'
-
+import Notifications from '../screens/Notifications'
+import  style from '../helpers'
+import { TouchableOpacity, Text } from 'react-native'
+import Back from '../assets/icons/btnback.svg'
 const PublicStack = createStackNavigator()
 const PrivateStack = createStackNavigator()
 
@@ -23,6 +26,22 @@ export const PublicRoute = () => {
 export const PrivateRoute = () => {
     return (
         <PrivateStack.Navigator>
+            <PrivateStack.Screen name="Notifications" component={Notifications} options={{headerShown: false}}
+            // options={{
+            //     headerTitle:'',
+            //     headerStyle:{elevation:0},
+            //     headerLeft: () => (
+            //         <TouchableOpacity onPress={() => alert('This is a button!')}>
+            //              <Back width={29} height={29} />
+            //         </TouchableOpacity>
+            //     ),
+            //     headerRight: () => (
+            //         <TouchableOpacity onPress={() => alert('This is a button!')}>
+            //             <Text style={{color:style.primary,fontWeight:'bold', padding:10}}>Clear</Text>
+            //         </TouchableOpacity>
+            //     ),
+            // }}
+            />
             <PrivateStack.Screen name="Booking" component={MyBooking} />
         </PrivateStack.Navigator>
     )
