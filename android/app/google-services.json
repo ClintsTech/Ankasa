@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "130345173314",
+    "firebase_url": "https://ankasa-8dc57.firebaseio.com",
+    "project_id": "ankasa-8dc57",
+    "storage_bucket": "ankasa-8dc57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130345173314:android:d29b0e39a5372d4c7a08db",
+        "android_client_info": {
+          "package_name": "com.mankasa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130345173314-mni8jbvc8jl8npin2vt8o7cfh6icq9fm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7-mwHoLdMklJyH3Ddg6CJNzR_f3shGQs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130345173314-mni8jbvc8jl8npin2vt8o7cfh6icq9fm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
