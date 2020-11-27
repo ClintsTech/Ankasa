@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Welcome from '../screens/Welcome'
 import Login from '../screens/Login'
 import MyBooking from '../screens/MyBooking'
+import Home from '../screens/Home'
 
 const PublicStack = createStackNavigator()
 const PrivateStack = createStackNavigator()
@@ -14,6 +15,7 @@ export const PublicRoute = () => {
         <PublicStack.Navigator>
             <PublicStack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
             <PublicStack.Screen name="Login" component={Login} options={{headerShown: false}} />
+            <PublicStack.Screen name="Home" component={Home} />
         </PublicStack.Navigator>
     )
 }

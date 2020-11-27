@@ -11,11 +11,18 @@ import FacebookIcon from '../assets/icons/facebook.svg'
 import TouchIcon from '../assets/icons/touch.svg'
 import Eye from '../assets/icons/view 1.svg'
 
-const Login = () => {
+const Login = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [eye, setEye] = useState(true)
     const dispatch = useDispatch()
+
+    const onSubmit = () => {
+        if(email && password) {
+            dispatch(login({ email, password }))
+        }
+    }
+
     return (
         <>
             <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
@@ -23,7 +30,9 @@ const Login = () => {
                 <View>
                     <ScrollView style={{height: '100%', backgroundColor: style.white}}>
                         <View style={styles.container}>
-                            <Back width={29} height={29} />
+                            <TouchableOpacity onPress={() => navigation.goBack()}>
+                                <Back width={29} height={29} />
+                            </TouchableOpacity>
                             <Text style={{fontSize: 36, color: '#000', fontWeight: 'bold', marginTop: 70}}>Login</Text>
                             <View style={{marginTop: 40}}>
                                 <Input
@@ -48,7 +57,7 @@ const Login = () => {
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                                <RectButton style={styles.button}>
+                                <RectButton onPress={onSubmit} style={styles.button}>
                                     <Text style={{textAlign: 'center', color: style.white, fontSize: 18, fontWeight: 'bold'}}>
                                         Sign In
                                     </Text>
