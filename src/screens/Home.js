@@ -18,7 +18,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getDestination())
-    })
+    }, [])
 
     const renderItems = ({ item, index }) => {
         return (
