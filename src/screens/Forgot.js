@@ -10,7 +10,7 @@ const Forgot = ({navigation}) => {
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Back width={29} height={29} />
       </TouchableOpacity>
-      
+
       <View style={{paddingTop: 100}}>
         <View>
           <Text style={{fontSize: 40, fontWeight: 'bold', textAlign: 'center'}}>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
     paddingVertical: 30,
     backgroundColor: '#FFFFFF',
-    height: '100%'
+    height: '100%',
   },
   button: {
     backgroundColor: style.primary,

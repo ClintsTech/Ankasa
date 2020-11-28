@@ -11,7 +11,7 @@ import {
 import style from '../helpers';
 import Back from '../assets/icons/btnback.svg';
 const Notifications = () => {
-    const [isActive, setIsActive] = React.useState(true)
+  const [isActive, setIsActive] = React.useState(true);
   return (
     <>
       <StatusBar backgroundColor={style.white} barStyle="dark-content" />
@@ -19,7 +19,12 @@ const Notifications = () => {
         <View>
           <ScrollView style={styles.container}>
             <View style={styles.body}>
-              <View style={{flexDirection:'row', justifyContent:'space-between', marginVertical:15}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginVertical: 15,
+                }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                   <Back width={24} height={24} />
                 </TouchableOpacity>
@@ -28,24 +33,39 @@ const Notifications = () => {
                 </TouchableOpacity>
               </View>
               <Text style={styles.title}>Notifications</Text>
-              <View style={isActive?styles.cardActive:styles.cardInactive}>
-                <Text style={isActive?styles.cardTitleAcive:styles.cardTitleInacive}>Congratulations</Text>
+              <View style={isActive ? styles.cardActive : styles.cardInactive}>
+                <Text
+                  style={
+                    isActive ? styles.cardTitleAcive : styles.cardTitleInacive
+                  }>
+                  Congratulations
+                </Text>
                 <Text style={styles.cardBody}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore....
                 </Text>
                 <Text style={styles.cardBody}>5h ago</Text>
               </View>
-              <View style={isActive?styles.cardActive:styles.cardInactive}>
-                <Text style={isActive?styles.cardTitleAcive:styles.cardTitleInacive}>Congratulations</Text>
+              <View style={isActive ? styles.cardActive : styles.cardInactive}>
+                <Text
+                  style={
+                    isActive ? styles.cardTitleAcive : styles.cardTitleInacive
+                  }>
+                  Congratulations
+                </Text>
                 <Text style={styles.cardBody}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore....
                 </Text>
                 <Text style={styles.cardBody}>5h ago</Text>
               </View>
-              <View style={isActive?styles.cardActive:styles.cardInactive}>
-                <Text style={isActive?styles.cardTitleAcive:styles.cardTitleInacive}>Congratulations</Text>
+              <View style={isActive ? styles.cardActive : styles.cardInactive}>
+                <Text
+                  style={
+                    isActive ? styles.cardTitleAcive : styles.cardTitleInacive
+                  }>
+                  Congratulations
+                </Text>
                 <Text style={styles.cardBody}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore....
@@ -85,7 +105,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   cardTitleAcive: {color: style.primary, fontWeight: 'bold'},
-  cardTitleInacive: { fontWeight: 'bold'},
-  cardBody: {marginVertical: 10, color:style.darkGrey},
-  textNavigator: {color: style.primary, fontWeight: 'bold', fontSize:18},
+  cardTitleInacive: {fontWeight: 'bold'},
+  cardBody: {marginVertical: 10, color: style.darkGrey},
+  textNavigator: {color: style.primary, fontWeight: 'bold', fontSize: 18},
 });

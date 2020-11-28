@@ -8,6 +8,7 @@ import {store, persistor} from './src/redux/store';
 import SplashScreen from 'react-native-splash-screen';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 
+
 const styles = StyleSheet.create({
   droidSafeArea: {
     flex: 1,

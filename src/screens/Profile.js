@@ -7,9 +7,14 @@ import Logout from '../assets/icons/logout.svg';
 
 const Profile = () => {
   return (
-      <View style={{backgroundColor: 'white', height: '100%'}}>
-
-      <View style={{paddingVertical: 30, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
+    <View style={{backgroundColor: 'white', height: '100%'}}>
+      <View
+        style={{
+          paddingVertical: 30,
+          marginLeft: 20,
+          marginRight: 20,
+          flexDirection: 'row',
+        }}>
         <Text style={{fontSize: 40, fontWeight: 'bold'}}>Profile</Text>
         <Text
           style={{
@@ -65,97 +70,148 @@ const Profile = () => {
       </View>
 
       <View style={{paddingTop: 30}}>
-
-        <View style={{flexDirection: 'row' , justifyContent: 'space-between'}}>
-
-        <Text style={{fontWeight: 'bold', marginLeft: 20, paddingBottom: 20, fontSize: 20}}>Cards</Text>
-        <Text style={{color: '#2395FF', fontWeight: 'bold', marginRight: 20, paddingBottom: 20, fontSize: 20}}>+ Add</Text>
-
-        </View>
-        <ScrollView horizontal={true} pagingEnabled decelerationRate="fast" showsHorizontalScrollIndicator ={false}>
-        <View style={{alignItems: 'center'}}>
-          <Card.Content
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text
             style={{
+              fontWeight: 'bold',
               marginLeft: 20,
-              backgroundColor: '#2395FF',
-              width: 300,
-              height: 90,
-              borderRadius: 20,
+              paddingBottom: 20,
+              fontSize: 20,
             }}>
-            <Text
+            Cards
+          </Text>
+          <Text
+            style={{
+              color: '#2395FF',
+              fontWeight: 'bold',
+              marginRight: 20,
+              paddingBottom: 20,
+              fontSize: 20,
+            }}>
+            + Add
+          </Text>
+        </View>
+        <ScrollView
+          horizontal={true}
+          pagingEnabled
+          decelerationRate="fast"
+          showsHorizontalScrollIndicator={false}>
+          <View style={{alignItems: 'center'}}>
+            <Card.Content
               style={{
-                paddingTop: 20,
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: 15,
+                marginLeft: 20,
+                backgroundColor: '#2395FF',
+                width: 300,
+                height: 90,
+                borderRadius: 20,
               }}>
-              {' '}
-              12413 12312 213213
-            </Text>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between', marginLeft: 5, paddingTop: 10}}>
-              <Text style={{color: '#AEFAFF'}}>XCard</Text>
-              <Text style={{color: '#AEFAFF'}}>PPP</Text>
-            </View>
-          </Card.Content>
+              <Text
+                style={{
+                  paddingTop: 20,
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                }}>
+                {' '}
+                12413 12312 213213
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginLeft: 5,
+                  paddingTop: 10,
+                }}>
+                <Text style={{color: '#AEFAFF'}}>XCard</Text>
+                <Text style={{color: '#AEFAFF'}}>PPP</Text>
+              </View>
+            </Card.Content>
           </View>
 
           <View style={{alignItems: 'center'}}>
-          <Card.Content
-            style={{
-              marginLeft: 20,
-              backgroundColor: '#535353',
-              width: 300,
-              height: 90,
-              borderRadius: 20,
-              marginRight: 20
-            }}>
-            <Text
+            <Card.Content
               style={{
-                paddingTop: 20,
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: 15,
+                marginLeft: 20,
+                backgroundColor: '#535353',
+                width: 300,
+                height: 90,
+                borderRadius: 20,
+                marginRight: 20,
               }}>
-              12413 12312 213213
-            </Text>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between', marginLeft: 5, paddingTop: 10}}>
-              <Text style={{color: '#FFFFFF'}}>XCard</Text>
-              <Text style={{color: '#FFFFFF'}}>PPP</Text>
-            </View>
-          </Card.Content>
+              <Text
+                style={{
+                  paddingTop: 20,
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                }}>
+                12413 12312 213213
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginLeft: 5,
+                  paddingTop: 10,
+                }}>
+                <Text style={{color: '#FFFFFF'}}>XCard</Text>
+                <Text style={{color: '#FFFFFF'}}>PPP</Text>
+              </View>
+            </Card.Content>
           </View>
         </ScrollView>
 
         <View style={{marginLeft: 25, paddingTop: 25}}>
-            <View style={{flexDirection: 'row'}}>
-                <Star width={24} height={24} />
-                <Text style={{marginLeft: 40, fontWeight: 'bold', fontSize: 20, bottom: 6}} >My Review</Text>
-            </View>
+          <View style={{flexDirection: 'row'}}>
+            <Star width={24} height={24} />
+            <Text
+              style={{
+                marginLeft: 40,
+                fontWeight: 'bold',
+                fontSize: 20,
+                bottom: 6,
+              }}>
+              My Review
+            </Text>
+          </View>
 
-            <View style={{flexDirection: 'row', paddingTop: 20}}>
-                <Setting width={24} height={24} />
-                <Text style={{marginLeft: 40, fontWeight: 'bold', fontSize: 20, bottom: 6}} >Settings</Text>
-            </View>
+          <View style={{flexDirection: 'row', paddingTop: 20}}>
+            <Setting width={24} height={24} />
+            <Text
+              style={{
+                marginLeft: 40,
+                fontWeight: 'bold',
+                fontSize: 20,
+                bottom: 6,
+              }}>
+              Settings
+            </Text>
+          </View>
 
-            <View style={{flexDirection: 'row', paddingTop: 20}}>
-                <Logout width={24} height={24} />
-                <Text style={{marginLeft: 40, fontWeight: 'bold', fontSize: 20, bottom: 6, color: 'red'}} >Logout</Text>
-            </View>
-
+          <View style={{flexDirection: 'row', paddingTop: 20}}>
+            <Logout width={24} height={24} />
+            <Text
+              style={{
+                marginLeft: 40,
+                fontWeight: 'bold',
+                fontSize: 20,
+                bottom: 6,
+                color: 'red',
+              }}>
+              Logout
+            </Text>
+          </View>
         </View>
       </View>
-    
     </View>
-  )
+  );
 };
 
 export default Profile;
 
 const styles = StyleSheet.create({
-    container: {
-      paddingHorizontal: 28,
-      paddingVertical: 30,
-    }
-})
+  container: {
+    paddingHorizontal: 28,
+    paddingVertical: 30,
+  },
+});
