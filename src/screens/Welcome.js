@@ -71,7 +71,7 @@ const Welcome = ({ navigation }) => {
               {renderPagination()}
 
                 <View style={{marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                    <Button style={{justifyContent: 'center', backgroundColor: '#2395FF', borderRadius: 10,height: 60, elevation: 5}}>
+                    <Button  onPress={() => navigation.navigate("SignUp")} style={{justifyContent: 'center', backgroundColor: '#2395FF', borderRadius: 10,height: 60, elevation: 5}}>
                         <Text style={{color: 'white', margin: '50%'}}>Create My Account</Text>
                     </Button>
                     <Button onPress={() => navigation.navigate("Login")} mode='outlined' style={{justifyContent: 'center', borderRadius: 10,height: 60, marginTop: 20}}>
