@@ -17,17 +17,13 @@ const MainNavigator = () => {
         SplashScreen.hide()
     }, [isLogin])
 
-    return (
-        <NavigationContainer>
-            {isLogin ? (
-                <PrivateRoute />
-            ) : (
-                <PublicRoute />
-            )}
-        </NavigationContainer>
-    )
-}
+  return (
+    <NavigationContainer>
+      {isLogin ? <PrivateRoute /> : <PublicRoute />}
+    </NavigationContainer>
+  );
+};
 
-export default MainNavigator
+export default MainNavigator;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -10,20 +10,36 @@ import Notifications from '../screens/Notifications'
 import SignUp from '../screens/SignUp'
 import Search from '../screens/Search'
 
-const PublicStack = createStackNavigator()
-const PrivateStack = createBottomTabNavigator()
-const Private = createStackNavigator()
+const PublicStack = createStackNavigator();
+const PrivateStack = createBottomTabNavigator();
+const Private = createStackNavigator();
 
 export const PublicRoute = () => {
-    return (
-        <PublicStack.Navigator>
-            <PublicStack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
-            <PublicStack.Screen name="Login" component={Login} options={{headerShown: false}} />
-            <PublicStack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
-            <PublicStack.Screen name="Home" component={Home} options={{headerShown: false}} />
-        </PublicStack.Navigator>
-    )
-}
+  return (
+    <PublicStack.Navigator>
+      <PublicStack.Screen
+        name="Welcome"
+        component={Welcome}
+        options={{headerShown: false}}
+      />
+      <PublicStack.Screen
+        name="Login"
+        component={Login}
+        options={{headerShown: false}}
+      />
+      <PublicStack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{headerShown: false}}
+      />
+      <PublicStack.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false}}
+      />
+    </PublicStack.Navigator>
+  );
+};
 
 const PrivateTab = () => {
     return (
@@ -36,12 +52,16 @@ const PrivateTab = () => {
 }
 
 const ProfileStack = () => {
-    return (
-        <Private.Navigator>
-            <Private.Screen name="Profile" component={Profile} options={{headerShown: false}} />
-        </Private.Navigator>
-    )
-}
+  return (
+    <Private.Navigator>
+      <Private.Screen
+        name="Profile"
+        component={Profile}
+        options={{headerShown: false}}
+      />
+    </Private.Navigator>
+  );
+};
 
 const HomeStack = () => {
     return (
@@ -54,9 +74,13 @@ const HomeStack = () => {
 }
 
 export const PrivateRoute = () => {
-    return (
-        <Private.Navigator>
-            <Private.Screen name="Private" component={PrivateTab} options={{headerShown: false}} />
-        </Private.Navigator>
-    )
-}
+  return (
+    <Private.Navigator>
+      <Private.Screen
+        name="Private"
+        component={PrivateTab}
+        options={{headerShown: false}}
+      />
+    </Private.Navigator>
+  );
+};

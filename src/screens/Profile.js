@@ -168,8 +168,8 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
-    container: {
-      paddingHorizontal: 28,
-      paddingVertical: 30,
-    }
-})
+  container: {
+    paddingHorizontal: 28,
+    paddingVertical: 30,
+  },
+});
