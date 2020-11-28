@@ -9,7 +9,7 @@ import Profile from '../screens/Profile';
 import Notifications from '../screens/Notifications';
 import SignUp from '../screens/SignUp';
 import Chat from '../screens/Chat';
-
+import Search from '../screens/Search'
 const PublicStack = createStackNavigator();
 const PrivateStack = createBottomTabNavigator();
 const Private = createStackNavigator();
@@ -82,6 +82,8 @@ const PrivateTab = () => {
       <PrivateStack.Screen name="Booking" component={MyBooking} />
       <PrivateStack.Screen name="Home" component={HomeStack}  />
       <PrivateStack.Screen name="Profile" component={ProfileStack} />
+      <Private.Screen name="Notification" component={Notifications} options={{headerShown: false}} />
+            <Private.Screen name="Search" component={Search} options={{headerShown: false}} />
     </PrivateStack.Navigator>
   );
 };

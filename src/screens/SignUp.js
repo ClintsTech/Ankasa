@@ -1,30 +1,41 @@
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  SafeAreaView,
-  StatusBar,
-} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {login} from '../redux/actions/login';
-import Back from '../assets/icons/btnback.svg';
-import Input from '../components/input';
-import {RectButton, TouchableOpacity} from 'react-native-gesture-handler';
-import style from '../helpers';
-import CheckBox from '@react-native-community/checkbox';
-import Eye from '../assets/icons/view 1.svg';
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, StatusBar, Alert, ToastAndroid } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+import Back from '../assets/icons/btnback.svg'
+import Input from '../components/input'
+import { RectButton, TouchableOpacity } from 'react-native-gesture-handler'
+import style from '../helpers'
+import CheckBox from '@react-native-community/checkbox'
+import Eye from '../assets/icons/view 1.svg'
+import { signup } from '../redux/actions/register'
 
-const SignUp = ({navigation}) => {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [eye, setEye] = useState(true);
-  const dispatch = useDispatch();
+const SignUp = ({ navigation }) => {
+    const [toggleCheckBox, setToggleCheckBox] = useState(false)
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [eye, setEye] = useState(true)
+    const dispatch = useDispatch()
+    const { isSuccess } = useSelector(state => state.register)
 
-  const onSubmit = () => {};
+    useEffect(() => {
+        if(isSuccess) {
+            ToastAndroid.show('Register Success', ToastAndroid.SHORT)
+            navigation.navigate('Login')
+        }
+    }, [isSuccess])
+
+    const onSubmit = () => {
+        if(toggleCheckBox && name && email && password) {
+            dispatch(signup({
+                name,
+                email,
+                password
+            }))
+        } else {
+            Alert.alert('Form Not Fill', 'Name, Email, Password Must be fulfilled and Accept Terms and Conditions')
+        }
+    }
 
   return (
     <>
