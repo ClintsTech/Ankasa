@@ -1,22 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  ImageBackground,
-} from 'react-native';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import style from '../helpers';
-import Bell from '../assets/icons/bell.svg';
-import Mail from '../assets/icons/mail.svg';
-import Search from '../assets/icons/search.svg';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { SafeAreaView, StatusBar, StyleSheet, Text, TextInput, View, ImageBackground } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import style from '../helpers'
+import Bell from '../assets/icons/bell.svg'
+import Mail from '../assets/icons/mail.svg'
+import Search from '../assets/icons/search.svg'
+import { useDispatch, useSelector } from 'react-redux'
 import Carousel from 'react-native-snap-carousel';
-import {getDestination} from '../redux/actions/destination';
-import More from '../assets/icons/more.svg';
+import { getDestination } from '../redux/actions/destination'
+import More from '../assets/icons/more.svg'
 
 const Home = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -28,7 +20,25 @@ const Home = ({ navigation }) => {
         dispatch(getDestination())
     }, [])
 
-  const renderItems = ({item, index}) => {
+    const renderItems = ({ item, index }) => {
+        return (
+            <View style={{ borderRadius: 10}}>
+                <ImageBackground source={{ uri: item.img }} style={styles.image} imageStyle={{borderRadius: 10}}>
+                    <View>
+                        <Text>Airlines</Text>
+                    </View>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <View>
+                            <Text style={{fontSize: 16, color: style.white, fontWeight: '800'}}>{item.city},</Text>
+                            <Text style={{fontSize: 24, color: style.white, fontWeight: '800'}}>{item.country}</Text>
+                        </View>
+                        <More width={24} height={24} />
+                    </View>
+                </ImageBackground>
+            </View>
+        )
+    }
+    
     return (
         <>
             <StatusBar />
@@ -93,26 +103,26 @@ const Home = ({ navigation }) => {
     )
 }
 
-export default Home;
+export default Home
 
 const styles = StyleSheet.create({
-  search: {
-    backgroundColor: style.grey,
-    borderRadius: 10,
-    position: 'relative',
-    paddingHorizontal: 20,
-    paddingVertical: 7,
-    justifyContent: 'center',
-  },
-  input: {
-    color: style.darkGrey,
-    fontSize: 14,
-  },
-  image: {
-    width: 250,
-    height: 250,
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-    justifyContent: 'space-between',
-  },
-});
+    search: {
+        backgroundColor: style.grey,
+        borderRadius: 10,
+        position: 'relative',
+        paddingHorizontal: 20,
+        paddingVertical: 7,
+        justifyContent: 'center'
+    },
+    input: {
+        color: style.darkGrey,
+        fontSize: 14
+    },
+    image: {
+        width: 250,
+        height: 250,
+        paddingHorizontal: 24,
+        paddingVertical: 16,
+        justifyContent: 'space-between'
+    }
+})
