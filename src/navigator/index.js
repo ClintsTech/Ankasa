@@ -26,22 +26,7 @@ export const PublicRoute = () => {
 export const PrivateRoute = () => {
     return (
         <PrivateStack.Navigator>
-            <PrivateStack.Screen name="Notifications" component={Notifications} options={{headerShown: false}}
-            // options={{
-            //     headerTitle:'',
-            //     headerStyle:{elevation:0},
-            //     headerLeft: () => (
-            //         <TouchableOpacity onPress={() => alert('This is a button!')}>
-            //              <Back width={29} height={29} />
-            //         </TouchableOpacity>
-            //     ),
-            //     headerRight: () => (
-            //         <TouchableOpacity onPress={() => alert('This is a button!')}>
-            //             <Text style={{color:style.primary,fontWeight:'bold', padding:10}}>Clear</Text>
-            //         </TouchableOpacity>
-            //     ),
-            // }}
-            />
+            <PrivateStack.Screen name="Notifications" component={Notifications} options={{headerShown: false}}/>
             <PrivateStack.Screen name="Booking" component={MyBooking} />
         </PrivateStack.Navigator>
     )
