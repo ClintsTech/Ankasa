@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 const Search = () => {
     return (
         <View>
-            <Text></Text>
+            <Text>Search</Text>
         </View>
     )
 }

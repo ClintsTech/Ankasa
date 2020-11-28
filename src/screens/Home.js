@@ -10,7 +10,7 @@ import Carousel from 'react-native-snap-carousel';
 import { getDestination } from '../redux/actions/destination'
 import More from '../assets/icons/more.svg'
 
-const Home = () => {
+const Home = ({ navigation }) => {
     const dispatch = useDispatch()
     const { isLogin } = useSelector(state => state.auth)
     const { destination } = useSelector(state => state.destination)
@@ -49,7 +49,7 @@ const Home = () => {
                             <Text style={{fontSize: 36, color: '#000', fontWeight: 'bold'}}>Explore</Text>
                             {isLogin ? (
                                 <View style={{flexDirection: 'row'}}>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
                                         <Bell width={24} height={24} />
                                     </TouchableOpacity>
                                     <TouchableOpacity style={{marginLeft: 20}}>
@@ -61,7 +61,7 @@ const Home = () => {
                             )}
                         </View>
                         <View style={{paddingHorizontal: 28, marginBottom: 20}}>
-                            <View style={styles.search}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Search')} style={styles.search}>
                                 <View style={{position: 'absolute', top: 20, left: 15}}>
                                     <Search width={24} height={24} />
                                 </View>
@@ -74,7 +74,7 @@ const Home = () => {
                                         onChangeText={text => setQuery(text)}
                                     />
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         </View>
                         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 28, marginBottom: 15}}>
                             <Text style={{fontSize: 20, color: '#000', fontWeight: 'bold'}}>Trending Destination</Text>

@@ -8,6 +8,7 @@ import Home from '../screens/Home'
 import Profile from '../screens/Profile'
 import Notifications from '../screens/Notifications'
 import SignUp from '../screens/SignUp'
+import Search from '../screens/Search'
 
 const PublicStack = createStackNavigator()
 const PrivateStack = createBottomTabNavigator()
@@ -24,11 +25,12 @@ export const PublicRoute = () => {
     )
 }
 
-const HomeStack = () => {
+const PrivateTab = () => {
     return (
         <Private.Navigator>
-            <Private.Screen name="Home" component={Home} options={{headerShown: false}} />
-            <Private.Screen name="Notifications" component={Notifications} options={{headerShown: false}} />
+            <Private.Screen name="Home" component={HomeStack} options={{headerShown: false}} />
+            <Private.Screen name="Notification" component={Notifications} options={{headerShown: false}} />
+            <Private.Screen name="Search" component={Search} options={{headerShown: false}} />
         </Private.Navigator>
     )
 }
@@ -41,11 +43,11 @@ const ProfileStack = () => {
     )
 }
 
-const PrivateTab = () => {
+const HomeStack = () => {
     return (
         <PrivateStack.Navigator initialRouteName="Home">
             <PrivateStack.Screen name="Booking" component={MyBooking} />
-            <PrivateStack.Screen name="Home" component={HomeStack} />
+            <PrivateStack.Screen name="Home" component={Home} />
             <PrivateStack.Screen name="Profile" component={ProfileStack}/>
         </PrivateStack.Navigator>
     )

@@ -38,7 +38,7 @@ export default (state = initialState, action) => {
         default:
             return {
                 ...state,
-                isFormFilled: false
+               isSuccess: false
             }
     }
 }
