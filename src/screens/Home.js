@@ -18,7 +18,7 @@ import Carousel from 'react-native-snap-carousel';
 import {getDestination} from '../redux/actions/destination';
 import More from '../assets/icons/more.svg';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const dispatch = useDispatch();
   const {isLogin} = useSelector((state) => state.auth);
   const {destination} = useSelector((state) => state.destination);
@@ -84,7 +84,7 @@ const Home = () => {
                   <TouchableOpacity>
                     <Bell width={24} height={24} />
                   </TouchableOpacity>
-                  <TouchableOpacity style={{marginLeft: 20}}>
+                  <TouchableOpacity style={{marginLeft: 20}} onPress={()=>navigation.navigate('Chat')}>
                     <Mail width={24} height={24} />
                   </TouchableOpacity>
                 </View>
