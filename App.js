@@ -26,13 +26,9 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <PaperProvider>
-          <StatusBar
-            translucent
-            barStyle="dark-content"
-            backgroundColor="transparent"/>
-          <SafeAreaView style={styles.droidSafeArea}>
+            {/* <SafeAreaView style={styles.droidSafeArea}> */}
             <MainNavigator />
-          </SafeAreaView>
+          {/* </SafeAreaView> */}
         </PaperProvider>
       </PersistGate>
     </Provider>

@@ -14,7 +14,6 @@ const Notifications = ({ navigation }) => {
     const [isActive, setIsActive] = React.useState(true)
   return (
     <>
-      <StatusBar backgroundColor={style.white} barStyle="dark-content" />
       <SafeAreaView>
         <View>
           <ScrollView style={styles.container}>
@@ -83,7 +82,7 @@ const Notifications = ({ navigation }) => {
 export default Notifications;
 
 const styles = StyleSheet.create({
-  container: {height: '100%', backgroundColor: style.white},
+  container: {height: '100%', backgroundColor: style.white, paddingTop: 10},
   title: {fontWeight: 'bold', fontSize: 30},
   body: {marginHorizontal: 20},
   cardActive: {

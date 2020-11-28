@@ -41,7 +41,6 @@ const Home = ({ navigation }) => {
     
     return (
         <>
-            <StatusBar />
             <SafeAreaView>
                 <ScrollView style={{height: '100%', backgroundColor:style.white }}>
                     <View>
