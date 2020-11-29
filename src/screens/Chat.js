@@ -8,57 +8,104 @@ import {
   StatusBar,
   Image,
   TouchableOpacity,
+  FlatList,
+  KeyboardAvoidingView,
 } from 'react-native';
 import style from '../helpers';
 import Input from '../components/input';
+// ES6 import
+import {io} from 'socket.io-client';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  getAllMessages,
+  sendingMessageSuccess,
+  postMessage,
+} from '../redux/actions/chat';
 
 const Chat = () => {
+  const [id, setId] = React.useState(1);
+  // const [chat, setChat] = React.useState('');
   const [message, setMessage] = React.useState('');
+  const dispatch = useDispatch();
+  const {allMessage} = useSelector((state) => state.chat);
+  const socket = io('http://192.168.43.149:8000');
+  React.useEffect(() => {
+    dispatch(getAllMessages(socket));
+    if (socket == null) return;
+
+    socket.on('postMessage', (res) => {
+      // setChat(result);
+      console.log(res);
+      dispatch(sendingMessageSuccess(res));
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  const onSubmit = () => {
+    const data = {
+      id_from: '1',
+      id_to: '2',
+      message: message,
+    };
+    dispatch(postMessage(socket, data));
+    setMessage('');
+  };
+  const Item = ({message, time}) => (
+    <View style={styles.message}>
+      <Text style={{color: style.dark}}>{message}</Text>
+      <Text style={styles.time}>{time}</Text>
+    </View>
+  );
+  const IncommingItem = ({message, time}) => (
+    <View style={styles.body}>
+      <Image
+        source={require('../assets/images/cs.png')}
+        style={{height: 40, width: 40}}
+      />
+      <View style={styles.incommingMessage}>
+        <Text style={{color: style.white}}>{message}</Text>
+        <Text style={styles.incommingTime}>{time}</Text>
+      </View>
+    </View>
+  );
+
+  const renderItem = ({item}) => {
+    if (item.id_from === id) {
+      return <Item message={item.message} time={item.time} />;
+    } else {
+      return <IncommingItem message={item.message} time={item.time} />;
+    }
+  };
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <View>
           <ScrollView style={styles.container}>
-            <View style={styles.body}>
-              <Image
-                source={require('../assets/images/cs.png')}
-                style={{height: 40, width: 40}}
-              />
-              <View style={styles.incommingMessage}>
-                <Text style={{color: style.white}}>
-                  Ini chat Custommer service
-                </Text>
-                <Text style={styles.incommingTime}>7:20</Text>
-              </View>
-            </View>
-            <View style={styles.message}>
-              <Text style={{color: style.dark}}>Ini chat User</Text>
-              <Text style={styles.time}>7:20</Text>
-            </View>
-          </ScrollView>
-          <View
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              flexDirection: 'row',
-              width: '80%',
-              alignItems: 'center',
-              marginHorizontal: 5,
-            }}>
-            <Input
-              value={message}
-              onChangeText={(text) => setMessage(text)}
-              placeholder="Type some message"
-              returnKeyType="next"
-              autoCapitalize="none"
+            <FlatList
+              data={allMessage}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
             />
-            <TouchableOpacity
-              style={styles.sendButton}>
+          </ScrollView>
+        </View>
+          <View
+            style={styles.input}>
+            <View style={{width: '80%'}}>
+              <Input
+                value={message}
+                onChangeText={(text) => setMessage(text)}
+                placeholder="Type some message"
+                returnKeyType="next"
+                autoCapitalize="none"
+              />
+            </View>
+            <TouchableOpacity style={styles.sendButton} onPress={onSubmit}>
               <Text style={{color: style.white}}>Send</Text>
             </TouchableOpacity>
           </View>
-        </View>
       </SafeAreaView>
     </>
   );
@@ -67,28 +114,38 @@ const Chat = () => {
 export default Chat;
 
 const styles = StyleSheet.create({
-  container: {height: '100%', backgroundColor: style.white, paddingTop: 25},
+  container: {height: '95%', backgroundColor: style.white, paddingBottom:25},
   body: {marginHorizontal: 10, flexDirection: 'row', alignItems: 'center'},
   incommingMessage: {
     backgroundColor: style.primary,
     alignSelf: 'flex-start',
     padding: 10,
     borderRadius: 10,
-    marginHorizontal: 5,
+    margin: 5,
   },
   message: {
     backgroundColor: style.grey,
     alignSelf: 'flex-end',
     padding: 10,
     borderRadius: 10,
-    marginHorizontal: 5,
+    margin: 5,
   },
   incommingTime: {alignSelf: 'flex-end', color: style.grey, fontSize: 10},
   time: {alignSelf: 'flex-end', color: style.dark, fontSize: 10},
-  sendButton:{
+  sendButton: {
     backgroundColor: style.primary,
     borderRadius: 10,
     padding: 10,
     marginHorizontal: 10,
+  },
+  input:{
+    position: 'absolute',
+    bottom: -25,
+    flexDirection: 'row',
+    // width: '100%',
+    alignItems: 'center',
+    // marginHorizontal: 5,
+    backgroundColor: style.white,
+    overflow:'hidden'
   }
 });

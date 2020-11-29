@@ -4,7 +4,6 @@ import {
     SEND_MESSAGE_FAILED,
     GET_ALL_MESSAGE
 } from '../type/chat'
-
 const initialState ={
     message:'',
     allMessage:[],
@@ -23,23 +22,23 @@ export default ( state = initialState, action ) =>{
             return {
                 ...state,
                 loading:false,
-                message:action.payload.data,
+                message:action.item,
                 error:''
             }
         case SEND_MESSAGE_FAILED:
             return {
                 ...state,
                 loading:false,
-                error:action.payload.data,
+                error:action.item,
             }
         case GET_ALL_MESSAGE:
             return {
                 ...state,
                 loading:false,
-                allMessage:action.payload.data
+                allMessage:action.item
             }
     
         default:
-            break;
+            return state;
     }
 }
