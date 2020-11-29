@@ -51,7 +51,7 @@ const Home = ({ navigation }) => {
                                     <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
                                         <Bell width={24} height={24} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{marginLeft: 20}}>
+                                    <TouchableOpacity style={{marginLeft: 20}} onPress={()=>navigation.navigate('Chat')}>
                                         <Mail width={24} height={24} />
                                     </TouchableOpacity>
                                 </View>
