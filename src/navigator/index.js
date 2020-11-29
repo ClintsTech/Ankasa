@@ -13,94 +13,62 @@ import Search from '../screens/Search'
 import FlightDetail from '../screens/FlightDetail'
 import BookingDetail from '../screens/BookingDetail'
 
-const PublicStack = createStackNavigator();
-const PrivateStack = createBottomTabNavigator();
-const Private = createStackNavigator();
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const HomeTab = () => {
+  return (
+    <Tab.Navigator initialRouteName="Home">
+      <Tab.Screen name="MyBooking" component={MyBooking} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  )
+}
+
+const ProfileTab = () => {
+  return (
+    <Tab.Navigator initialRouteName="Profile">
+      <Tab.Screen name="MyBooking" component={MyBooking} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  )
+}
+
+const BookingTab = () => {
+  return (
+    <Tab.Navigator initialRouteName="MyBooking">
+      <Tab.Screen name="MyBooking" component={MyBooking} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  )
+}
 
 export const PublicRoute = () => {
   return (
-    <PublicStack.Navigator>
-      <PublicStack.Screen
-        name="Welcome"
-        component={Welcome}
-        options={{headerShown: false}}
-      />
-      <PublicStack.Screen
-        name="Login"
-        component={Login}
-        options={{headerShown: false}}
-      />
-      <PublicStack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{headerShown: false}}
-      />
-      <PublicStack.Screen
-        name="Home"
-        component={Home}
-        options={{headerShown: false}}
-      />
-    </PublicStack.Navigator>
-  );
-};
-
-const HomeStack = () => {
-  return (
-    <Private.Navigator>
-      <Private.Screen
-        name="Home"
-        component={Home}
-        options={{headerShown: false}}
-      />
-      <Private.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{headerShown: false}}
-      />
-      <Private.Screen name="Search" component={Search} options={{headerShown: false}} />
-      <Private.Screen name="DetailFlight" component={FlightDetail} options={{headerShown: false}} />
-      <Private.Screen name="BookingDetail" component={BookingDetail} options={{headerShown: false}} />
-    </Private.Navigator>
-  );
-};
-
-const ProfileStack = () => {
-  return (
-    <Private.Navigator>
-      <Private.Screen
-        name="Profile"
-        component={Profile}
-        options={{headerShown: false}}
-      />
-      <Private.Screen name="Notification" component={Notifications} options={{headerShown: false}} />
-      <Private.Screen
-        name="Chat"
-        component={Chat}
-        options={{headerShown: false}}
-        
-      />
-    </Private.Navigator>
-  );
-};
-
-const PrivateTab = () => {
-  return (
-    <PrivateStack.Navigator initialRouteName="Home">
-      <PrivateStack.Screen name="Booking" component={MyBooking} />
-      <PrivateStack.Screen name="Home" component={HomeStack}  />
-      <PrivateStack.Screen name="Profile" component={ProfileStack} />
-    </PrivateStack.Navigator>
-  );
-};
+    <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+      <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
+      <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
+      <Stack.Screen name="Home" component={HomeTab} options={{headerShown: false}} />
+      <Stack.Screen name="Profile" component={ProfileTab} options={{headerShown: false}} />
+      <Stack.Screen name="Booking" component={BookingTab} options={{headerShown: false}} />
+    </Stack.Navigator>
+  )
+}
 
 export const PrivateRoute = () => {
   return (
-    <Private.Navigator>
-      <Private.Screen
-        name="Private"
-        component={PrivateTab}
-        options={{headerShown: false}}
-      />
-    </Private.Navigator>
-  );
-};
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeTab} options={{headerShown: false}} />
+      <Stack.Screen name="Profile" component={ProfileTab} options={{headerShown: false}} />
+      <Stack.Screen name="Booking" component={BookingTab} options={{headerShown: false}} />
+      <Stack.Screen name="Search" component={Search} options={{headerShown: false}} />
+      <Stack.Screen name="Notifications" component={Notifications} options={{headerShown: false}} />
+      <Stack.Screen name="Chat" component={Chat} options={{headerShown: false}} />
+      <Stack.Screen name="FlightDetail" component={FlightDetail} options={{headerShown: false}} />
+    </Stack.Navigator>
+  )
+}
