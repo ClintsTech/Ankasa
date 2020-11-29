@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import style from '../helpers';
 import Back from '../assets/icons/btnback.svg';
+
 const Notifications = ({ navigation }) => {
     const [isActive, setIsActive] = React.useState(true)
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StatusBar, StyleSheet, Text, TextInput, View, ImageBackground } from 'react-native'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import { RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import style from '../helpers'
 import Bell from '../assets/icons/bell.svg'
 import Mail from '../assets/icons/mail.svg'
@@ -8,6 +8,7 @@ import Search from '../assets/icons/search.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import Carousel from 'react-native-snap-carousel';
 import { getDestination } from '../redux/actions/destination'
+import { getCountry } from '../redux/actions/search'
 import More from '../assets/icons/more.svg'
 
 const Home = ({ navigation }) => {
@@ -22,7 +23,10 @@ const Home = ({ navigation }) => {
 
     const renderItems = ({ item, index }) => {
         return (
-            <View style={{ borderRadius: 10}}>
+            <RectButton onPress={() => {
+                dispatch(getCountry(item))
+                navigation.navigate('Search')
+            }} style={{ borderRadius: 10}}>
                 <ImageBackground source={{ uri: item.img }} style={styles.image} imageStyle={{borderRadius: 10}}>
                     <View>
                         <Text>Airlines</Text>
@@ -35,7 +39,7 @@ const Home = ({ navigation }) => {
                         <More width={24} height={24} />
                     </View>
                 </ImageBackground>
-            </View>
+            </RectButton>
         )
     }
     
@@ -48,11 +52,11 @@ const Home = ({ navigation }) => {
                             <Text style={{fontSize: 36, color: '#000', fontWeight: 'bold'}}>Explore</Text>
                             {isLogin ? (
                                 <View style={{flexDirection: 'row'}}>
-                                    <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
-                                        <Bell width={24} height={24} />
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{marginLeft: 20}} onPress={()=>navigation.navigate('Chat')}>
+                                    <TouchableOpacity onPress={()=>navigation.navigate('Chat')}>
                                         <Mail width={24} height={24} />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.navigate('Notifications')}>
+                                        <Bell width={24} height={24} />
                                     </TouchableOpacity>
                                 </View>
                             ) : (

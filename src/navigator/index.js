@@ -12,36 +12,130 @@ import Chat from '../screens/Chat';
 import Search from '../screens/Search'
 import FlightDetail from '../screens/FlightDetail'
 import BookingDetail from '../screens/BookingDetail'
+import SearchResult from '../screens/SearchResult'
+import Edit from '../screens/EditProfile'
+import ProfileLogo from '../assets/icons/user.svg'
+import CalendarLogo from '../assets/icons/calendar.svg'
+import ProfileLogoActive from '../assets/icons/useractive.svg'
+import CalendarLogoActive from '../assets/icons/calendaractive.svg'
+import Explore from '../assets/icons/explore.svg'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeTab = () => {
   return (
-    <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen name="MyBooking" component={MyBooking} />
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Navigator initialRouteName="Home" tabBarOptions={{style: { height: 62}}}>
+      <Tab.Screen name="MyBooking" component={MyBooking} options={{
+        tabBarIcon: ({ focused }) => {
+          if(focused) {
+            return (
+              <CalendarLogoActive />
+            )
+          } else {
+            return (
+              <CalendarLogo />
+            )
+          }
+        }
+      }}/>
+      <Tab.Screen name="Home" component={Home} options={{
+        tabBarLabel: '',
+        tabBarIcon: () => (
+          <Explore />
+        )
+      }}/>
+      <Tab.Screen name="Profile" component={Profile} options={{
+        tabBarIcon: ({ focused }) => {
+          if(focused) {
+            return (
+              <ProfileLogoActive />
+            )
+          } else {
+            return (
+              <ProfileLogo />
+            )
+          }
+        }
+      }}/>
     </Tab.Navigator>
   )
 }
 
 const ProfileTab = () => {
   return (
-    <Tab.Navigator initialRouteName="Profile">
-      <Tab.Screen name="MyBooking" component={MyBooking} />
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Navigator initialRouteName="Profile"  tabBarOptions={{style: { height: 62}}}>
+      <Tab.Screen name="MyBooking" component={MyBooking} options={{
+        tabBarIcon: ({ focused }) => {
+          if(focused) {
+            return (
+              <CalendarLogoActive />
+            )
+          } else {
+            return (
+              <CalendarLogo />
+            )
+          }
+        }
+      }}/>
+      <Tab.Screen name="Home" component={Home} options={{
+        tabBarLabel: '',
+        tabBarIcon: () => (
+          <Explore />
+        )
+      }}/>
+      <Tab.Screen name="Profile" component={Profile} options={{
+        tabBarIcon: ({ focused }) => {
+          if(focused) {
+            return (
+              <ProfileLogoActive />
+            )
+          } else {
+            return (
+              <Profile />
+            )
+          }
+        }
+      }}/>
     </Tab.Navigator>
   )
 }
 
 const BookingTab = () => {
   return (
-    <Tab.Navigator initialRouteName="MyBooking">
-      <Tab.Screen name="MyBooking" component={MyBooking} />
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Navigator initialRouteName="MyBooking"  tabBarOptions={{style: { height: 62}}}>
+      <Tab.Screen name="MyBooking" component={MyBooking} options={{
+        tabBarIcon: ({ focused }) => {
+          if(focused) {
+            return (
+              <CalendarLogoActive />
+            )
+          } else {
+            return (
+              <CalendarLogo />
+            )
+          }
+        }
+      }}/>
+      <Tab.Screen name="Home" component={Home} options={{
+        tabBarLabel: '',
+        tabBarIcon: () => (
+          <Explore />
+        )
+      }}/>
+      <Tab.Screen name="Profile" component={Profile} options={{
+        tabBarIcon: ({ focused }) => {
+          if(focused) {
+            return (
+              <ProfileLogoActive />
+            )
+          } else {
+            return (
+              <Profile />
+            )
+          }
+        }
+      }}/>
     </Tab.Navigator>
   )
 }
@@ -66,9 +160,12 @@ export const PrivateRoute = () => {
       <Stack.Screen name="Profile" component={ProfileTab} options={{headerShown: false}} />
       <Stack.Screen name="Booking" component={BookingTab} options={{headerShown: false}} />
       <Stack.Screen name="Search" component={Search} options={{headerShown: false}} />
+      <Stack.Screen name="SearchResult" component={SearchResult} options={{headerShown: false}} />
       <Stack.Screen name="Notifications" component={Notifications} options={{headerShown: false}} />
       <Stack.Screen name="Chat" component={Chat} options={{headerShown: false}} />
       <Stack.Screen name="FlightDetail" component={FlightDetail} options={{headerShown: false}} />
+      <Stack.Screen name="BookingDetail" component={BookingDetail} options={{headerShown: false}} />
+      <Stack.Screen name="Edit" component={Edit} options={{headerShown: false}} />
     </Stack.Navigator>
   )
 }

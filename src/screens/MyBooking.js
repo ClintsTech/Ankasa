@@ -6,12 +6,14 @@ import {
   StatusBar,
   FlatList,
   StyleSheet,
+  SafeAreaView,
 } from 'react-native';
 import Mail from '../assets/icons/mail.svg';
 import Bell from '../assets/icons/bell.svg';
 import Plane from '../assets/icons/plane.svg';
 import Bg from './../assets/images/bg.png';
-import {RectButton, ScrollView} from 'react-native-gesture-handler';
+import {RectButton, ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 
 const DATA = [
   {
@@ -42,12 +44,15 @@ const Item = ({title}) => (
   </View>
 );
 
-const MyBooking = () => {
+const MyBooking = ({ navigation }) => {
+  const { isLogin } = useSelector(state => state.auth)
   const renderItem = ({item}) => (
-    <View>
+    <RectButton onPress={() => navigation.navigate('BookingDetail')} style={{ marginBottom: 20}}>
       <ImageBackground
         source={Bg}
-        style={{width: 300, height: 200, resizeMode: 'cover'}}>
+        style={{width: '100%', height: 230}}
+        imageStyle={{borderTopWidth: 1, borderColor: 'black'}}
+        >
         <View
           style={{
             marginTop: 10,
@@ -108,7 +113,7 @@ const MyBooking = () => {
           </RectButton>
         </View>
       </ImageBackground>
-    </View>
+    </RectButton>
   );
 
   return (
@@ -118,19 +123,26 @@ const MyBooking = () => {
         barStyle="dark-content"
         backgroundColor="transparent"
       />
+      <SafeAreaView>
+      <ScrollView style={{height: '100%', backgroundColor: 'white'}}>
       <View
         style={{
-          backgroundColor: 'white',
-          height: '100%',
-          paddingHorizontal: 28,
-          paddingVertical: 30,
+          paddingHorizontal: 28
         }}>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={{flex: 1, fontWeight: 'bold', fontSize: 30, bottom: 15}}>
-            My Booking
-          </Text>
-          <Mail style={{marginRight: 30}} width={24} height={24} />
-          <Bell width={24} height={24} />
+        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 30, marginBottom: 15}}>
+            <Text style={{fontSize: 36, color: '#000', fontWeight: 'bold'}}>My Booking</Text>
+            {isLogin ? (
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Chat')}>
+                        <Mail width={24} height={24} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.navigate('Notifications')}>
+                        <Bell width={24} height={24} />
+                    </TouchableOpacity>
+                </View>
+            ) : (
+                <Text></Text>
+            )}
         </View>
 
         <FlatList
@@ -140,6 +152,8 @@ const MyBooking = () => {
         />
 
       </View>
+      </ScrollView>
+      </SafeAreaView>
     </>
   );
 };

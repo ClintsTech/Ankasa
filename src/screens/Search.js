@@ -11,14 +11,16 @@ import DateTimePicker from 'react-native-modal-datetime-picker'
 import IconRight from '../assets/icons/iconright.svg'
 import { RadioButton } from 'react-native-paper'
 import To from '../assets/icons/searchto.svg'
+import { useSelector } from 'react-redux'
 
-const Search = () => {
+const Search = ({ navigation }) => {
+    const { country } = useSelector(state => state.search)
     return (
         <>
             <StatusBar barStyle="light-content" translucent backgroundColor="transparent"/>
             <ScrollView style={{ paddingVertical: 0, backgroundColor: style.white}}>
                 <View style={{ position: 'relative', height: Dimensions.get('window').height}}>
-                    <ImageBackground imageStyle={{borderBottomLeftRadius: 50, borderBottomRightRadius: 50}} source={require('../assets/images/destination.png')} style={styles.background}>
+                    <ImageBackground imageStyle={{borderBottomLeftRadius: 50, borderBottomRightRadius: 50}} source={{ uri: country.img }} style={styles.background}>
                         <View style={{paddingHorizontal: 28, justifyContent: 'space-between', height : "100%"}}>
                             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                 <Back  />
@@ -38,8 +40,8 @@ const Search = () => {
                         </View>
                         <View>
                             <Text style={{color: style.darkGrey, marginBottom: 7}}>To</Text>
-                            <Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>Tokyo</Text>
-                            <Text style={{color: style.darkGrey, marginTop: 4}}>Japan</Text>
+                            <Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>{country.city}</Text>
+                            <Text style={{color: style.darkGrey, marginTop: 4}}>{country.country}</Text>
                         </View>
                     </View>
                     <View style={{paddingHorizontal: 28, flexDirection: 'row', justifyContent: 'space-between', marginTop: 60, marginBottom: 20}}>
@@ -52,14 +54,15 @@ const Search = () => {
                             <Text style={{fontSize: 16, color: style.dark, fontWeight: 'bold', marginLeft: 14}}>Round Trip</Text>
                         </RectButton>
                     </View>
-                    <View style={{paddingHorizontal: 28}}>
+                    <ScrollView>
+                    <View style={{paddingHorizontal: 28, marginBottom: 20}}>
                         <Text style={{color: style.darkGrey, fontSize: 16, fontWeight: '900', marginBottom: 10}}>Departure</Text>
                         <TouchableOpacity style={styles.btndate}>
                             <Text>Monday, 20 July 2020</Text>
                             <IconRight />
                         </TouchableOpacity>
                     </View>
-                    <View style={{paddingHorizontal: 28}}>
+                    <View style={{paddingHorizontal: 28, marginBottom: 20}}>
                         <Text style={{color: style.darkGrey, fontSize: 16, fontWeight: '900', marginBottom: 10}}>How many person?</Text>
                         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                             <TouchableOpacity style={styles.btndate}>
@@ -72,7 +75,7 @@ const Search = () => {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={{paddingHorizontal: 28}}>
+                    <View style={{paddingHorizontal: 28, marginBottom: 20}}>
                         <Text style={{color: style.darkGrey, fontSize: 16, fontWeight: '900', marginBottom: 10}}>Which class do you want?</Text>
                         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
@@ -95,12 +98,13 @@ const Search = () => {
                             </View>
                         </View>
                     </View>
-                    <View style={{paddingHorizontal: 28}}>
-                        <RectButton style={[styles.button, { backgroundColor: style.primary, paddingVertical: 18 }]}>
+                    <View style={{paddingHorizontal: 28, marginBottom: 20}}>
+                        <RectButton onPress={() => navigation.navigate('SearchResult')} style={[styles.button, { backgroundColor: style.primary, paddingVertical: 18 }]}>
                             <Text style={{color: style.white, fontWeight: 'bold', fontSize: 18}}>Search Flight</Text>
                             <To />
                         </RectButton>
                     </View>
+                    </ScrollView>
                 </View>
             </ScrollView>
         </>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, Image, StyleSheet, StatusBar} from 'react-native';
+import {View, Text, Image, StyleSheet, StatusBar, SafeAreaView} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {Card} from 'react-native-paper';
 import Star from '../assets/icons/star.svg';
@@ -10,27 +10,44 @@ import { logout } from '../redux/actions/login'
 import { userLogout } from '../redux/actions/user'
 import style from '../helpers'
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const { data } = useSelector(state => state.user)
+  const { isLogin } = useSelector(state => state.auth)
   const dispatch = useDispatch()
+
+  if(!isLogin) {
+      return (
+        <>
+        <StatusBar />
+        <ScrollView style={{backgroundColor: 'white', height: '100%'}}>
+            <View style={{paddingBottom: 30}}>
+                <View style={{paddingVertical: 30, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
+                    <Text style={{fontSize: 40, fontWeight: 'bold'}}>Profile</Text>
+                </View>
+            </View>
+        </ScrollView>
+      </>
+      )
+  }
 
   return (
       <>
-        <StatusBar />
+        <StatusBar backgroundColor={style.white} barStyle="dark-content"/>
+        <SafeAreaView>
         <ScrollView style={{backgroundColor: 'white', height: '100%'}}>
         <View style={{paddingBottom: 30}}>
-            <View style={{paddingVertical: 30, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
-                <Text style={{fontSize: 40, fontWeight: 'bold'}}>Profile</Text>
-                <Text
-                style={{
-                    bottom: 45,
-                    position: 'absolute',
-                    right: 10,
-                    fontWeight: 'bold',
-                    color: '#2395FF',
-                }}>
-                Edit
-                </Text>
+            <View style={{paddingVertical: 30, paddingHorizontal: 28, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                <Text style={{fontSize: 36, fontWeight: 'bold'}}>Profile</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
+                    <Text
+                    style={{
+                        fontWeight: 'bold',
+                        color: '#2395FF',
+                        fontSize: 18
+                    }}>
+                        Edit
+                    </Text>
+                </TouchableOpacity>
             </View>
 
             <View
@@ -158,9 +175,9 @@ const Profile = () => {
 
                 </View>
             </View>
-            
             </View>
         </ScrollView>
+        </SafeAreaView>
       </>
   )
 };
