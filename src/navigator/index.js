@@ -54,12 +54,7 @@ const HomeStack = () => {
         component={Notifications}
         options={{headerShown: false}}
       />
-      <Private.Screen
-        name="Chat"
-        component={Chat}
-        options={{headerShown: false}}
-        
-      />
+      <Private.Screen name="Search" component={Search} options={{headerShown: false}} />
     </Private.Navigator>
   );
 };
@@ -72,6 +67,13 @@ const ProfileStack = () => {
         component={Profile}
         options={{headerShown: false}}
       />
+      <Private.Screen name="Notification" component={Notifications} options={{headerShown: false}} />
+      <Private.Screen
+        name="Chat"
+        component={Chat}
+        options={{headerShown: false}}
+        
+      />
     </Private.Navigator>
   );
 };
@@ -82,8 +84,6 @@ const PrivateTab = () => {
       <PrivateStack.Screen name="Booking" component={MyBooking} />
       <PrivateStack.Screen name="Home" component={HomeStack}  />
       <PrivateStack.Screen name="Profile" component={ProfileStack} />
-      <Private.Screen name="Notification" component={Notifications} options={{headerShown: false}} />
-            <Private.Screen name="Search" component={Search} options={{headerShown: false}} />
     </PrivateStack.Navigator>
   );
 };
