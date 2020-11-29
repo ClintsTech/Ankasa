@@ -10,6 +10,9 @@ import Notifications from '../screens/Notifications';
 import SignUp from '../screens/SignUp';
 import Chat from '../screens/Chat';
 import Search from '../screens/Search'
+import FlightDetail from '../screens/FlightDetail'
+import BookingDetail from '../screens/BookingDetail'
+
 const PublicStack = createStackNavigator();
 const PrivateStack = createBottomTabNavigator();
 const Private = createStackNavigator();
@@ -55,6 +58,8 @@ const HomeStack = () => {
         options={{headerShown: false}}
       />
       <Private.Screen name="Search" component={Search} options={{headerShown: false}} />
+      <Private.Screen name="DetailFlight" component={FlightDetail} options={{headerShown: false}} />
+      <Private.Screen name="BookingDetail" component={BookingDetail} options={{headerShown: false}} />
     </Private.Navigator>
   );
 };
