@@ -1,4 +1,6 @@
-import { GET_COUNTRY, FORM_FILL } from '../type/search'
+import { GET_COUNTRY, FORM_FILL, SEARCH } from '../type/search'
+import axios from 'axios'
+import { URI } from '../../utils'
 
 export const getCountry = country => {
     return {
@@ -7,6 +9,18 @@ export const getCountry = country => {
     }
 }
 
-export const formFill = data => async dispatch => {
-    
+export const search = data => async dispatch => {
+    try {
+        const res = await axios.post(`${URI}/flight/search-flight`, data)
+        dispatch({ type: SEARCH, payload: res.data.data })
+    } catch (error) {
+        
+    }
+}
+
+export const formFill = data => {
+    return {
+        type: FORM_FILL,
+        payload: data
+    }
 }

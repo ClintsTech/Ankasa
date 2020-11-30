@@ -7,71 +7,63 @@ import {
   ImageBackground,
   TouchableOpacity,
   ScrollView,
-  FlatList
+  FlatList,
+  Dimensions
 } from "react-native";
 import Plane from "../assets/images/Plane.png";
 import arrowLeftWhite from "../assets/icons/arrowLeftWhite.svg";
 import arrowWhite from "../assets/icons/arrowWhite.svg";
 import arrow from "../assets/icons/arrow.svg";
-import smallPlane from "../assets/icons/smallPlane.svg";
+import SmallPlane from "../assets/icons/smallPlane.svg";
+import Transfer from '../assets/icons/transfer-white.svg'
+import style from '../helpers'
+import Back from '../assets/icons/btnback-white.svg'
+import { getFlight } from '../redux/actions/flights'
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RectButton } from "react-native-gesture-handler";
-
+import moment from 'moment'
+import 'moment/locale/en-gb'
+moment.locale('en-gb')
 
 const SearchResult = ({navigation}) => {
 
   const dispatch = useDispatch()
+  const { dataForm, data } = useSelector(state => state.search)
 
-  const data = [
-    {
-      id: '1',
-      departure: '12.33',
-     arrived: '15.21',
-     type: 'Garuda',
-     price: '$214,00'
-    },
-    {
-      id: '2',
-      departure: '10.00',
-     arrived: '14.00',
-     type: 'Garuda',
-     price: '$214,00'
-    },
-
-  ];
+  const onClick = (id) => {
+    dispatch(getFlight(id))
+    navigation.navigate('FlightDetail')
+  }
 
   const renderItem = ({item, index}) => {
+    const date = item.time_estimate.split(':')
+    const hour = date[0]
+    const minute = date[1]
+
     return (
-        <RectButton onPress={() => navigation.navigate('FlightDetail')} style={styles.detail}>
-          <View style={styles.detail1}>
-            <View style={styles.idn}>
-              <Text style={styles.idn1}>IDN</Text>
-              <Text style={styles.dateIdn}>12:33</Text>
+        <TouchableOpacity onPress={() => onClick(item.flight_id)} style={{borderColor: '#C4C4C4', borderWidth: 1.5, borderRadius: 7.5, padding: 20}}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View style={{flexDirection: 'row'}}>
+              <View style={{marginRight: 15}}>
+                <Text style={{fontSize: 22, fontWeight: 'bold', color: style.dark}}>{item.city_departure}</Text>
+                <Text>{moment(item.departure).format('LT')}</Text>
+              </View>
+              <SmallPlane />
+              <View style={{marginLeft: 15}}>
+                <Text style={{fontSize: 22, fontWeight: 'bold', color: style.dark}}>{item.city_arrived}</Text>
+                <Text>{moment(item.departure).add(hour, 'hour').add(minute, 'minute').format('LT')}</Text>
+              </View>
             </View>
             <View>
-              <Image source={smallPlane} style={styles.smallPlane} />
+              <Text style={{color: '#9F9F9F'}}>Terminal <Text style={{color: style.dark, fontWeight: 'bold'}}>{item.terminal}</Text></Text>
+              <Text style={{color: '#9F9F9F'}}>Gate <Text style={{color: style.dark, fontWeight: 'bold'}}>{item.gate}</Text></Text>
             </View>
-            <View style={styles.jpn}>
-              <Text style={styles.jpn1}>JPN</Text>
-              <Text style={styles.dateJpn}>15:21</Text>
-            </View>
-            <View style={styles.flight}>
-              <Text style={styles.terminal}>
-                Terminal <Text style={styles.terminal1}>A</Text>
-              </Text>
-              <Text style={styles.gate}>
-                Gate <Text style={styles.gade1}>221</Text>
-              </Text>
-            </View>
-          </View>
-          <View>
-            <Text style={styles.typePlane}>Garuda Indonesia</Text>
-            <View style={styles.price}>
-              <Text style={styles.price1}>$214,00</Text>
-            </View>
-          </View>
-        </RectButton>
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 15}}>
+          <Text style={{fontSize: 18, color: style.darkMed}}>{item.plane}</Text>
+          <Text style={{fontSize: 18, color: style.primary, fontWeight: 'bold'}}>Rp. {item.price}</Text>
+        </View>
+        </TouchableOpacity>
     );
   };
 
@@ -80,59 +72,63 @@ const SearchResult = ({navigation}) => {
     <ScrollView style={styles.body}>
       <View >
         <View style={styles.cardHeader}>
-          <ImageBackground source={Plane} style={styles.palne}>
-            <View style={styles.items}>
-              <TouchableOpacity 
-              onPress={() => navigation.navigate('Search')}
-              style={styles.image}>
-                <Image source={arrowLeftWhite} style={styles.arrowLeftWhite} />
-              </TouchableOpacity>
-              <View style={styles.date}>
-                <Text style={styles.date1}>Monday, 20 july'20</Text>
-              </View>
-            </View>
-            <View style={styles.items1}>
-              <View style={styles.from}>
-                <Text style={styles.descript}>From</Text>
-                <Text style={styles.city}>Medan</Text>
-                <Text style={styles.country}>Indonesia</Text>
-              </View>
-              <View>
-                <Image source={arrowWhite} style={styles.arrowWhite} />
-              </View>
-              <View style={styles.destination}>
-                <Text style={styles.descript}>To</Text>
-                <Text style={styles.city}>Tokyo</Text>
-                <Text style={styles.country}>Japan</Text>
-              </View>
+          <ImageBackground source={Plane} imageStyle={{borderBottomLeftRadius: 25}} style={styles.palne}>
+          <View style={{paddingHorizontal: 28, justifyContent: 'space-between', height : "100%", width: '100%'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+                    <TouchableOpacity>
+                      <Back  />
+                    </TouchableOpacity>
+                    <View style={{backgroundColor: 'rgba(255, 255, 255, 0.28)', paddingHorizontal: 15, paddingVertical: 10, borderRadius: 6}}>
+                      <Text style={{color: style.white}}>{dataForm.departure}</Text>
+                    </View>
+                </View>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'center'}}>
+                    <View>
+                        <Text style={{color: style.white, marginBottom: 7}}>From</Text>
+                        <Text style={{color: style.white, fontSize: 20, fontWeight: 'bold'}}>{dataForm.city_departure.city}</Text>
+                        <Text style={{color: style.white, marginTop: 4}}>{dataForm.city_departure.country}</Text>
+                    </View>
+                    <View>
+                        <Transfer />
+                    </View>
+                    <View>
+                        <Text style={{color: style.white, marginBottom: 7}}>To</Text>
+                        <Text style={{color: style.white, fontSize: 20, fontWeight: 'bold'}}>{dataForm.city_arrived.city}</Text>
+                        <Text style={{color: style.white, marginTop: 4}}>{dataForm.city_arrived.country}</Text>
+                    </View>
+                </View>
             </View>
           </ImageBackground>
         </View>
         <View style={styles.card}>
           <View style={styles.passangger}>
             <Text style={styles.passangger1}>Passengger</Text>
-            <Text style={styles.passanggers}>2 Chaild 4 Adults</Text>
+            <Text style={styles.passanggers}>{`${dataForm.passengger.child} Child ${dataForm.passengger.adult} Adult`}</Text>
           </View>
           <View style={styles.class}>
             <Text style={styles.class1}>Class</Text>
-            <Text style={styles.economy}>Economy</Text>
+            <Text style={styles.economy}>{dataForm.class}</Text>
           </View>
         </View>
-        <View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20}}>
+        <View style={{marginBottom: 10}}>
           <Text style={styles.type}>6 flight found</Text>
         </View>
-        <View>
-          <TouchableOpacity style={styles.filter}>
+        <View style={{marginBottom: 10}}>
+          <TouchableOpacity>
             <Text style={styles.filters}>Filter</Text>
             <Image source={arrow} style={styles.arrow} />
           </TouchableOpacity>
         </View>
+        </View>
+        <View style={{paddingHorizontal: 20}}>
         <FlatList
             showsVerticalScrollIndicator={false}
             data={data}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item.flight_id}
             renderItem={renderItem}
           />
+        </View>
       </View>
     </ScrollView>
   </>
@@ -148,15 +144,24 @@ const styles = StyleSheet.create({
   cardHeader: {
     backgroundColor: "#2395FF",
     width: "100%",
-    height: 180,
+    height: 231,
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
-    position: "relative",
     zIndex: 2
   },
+  card: {
+    borderRadius: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 13
+  },
   palne: {
-    width: 240,
-    height: 180
+    width: '100%',
+    height: 231,
+    paddingTop: 50,
+    paddingBottom: 15
   },
   items: { marginTop: 25 },
   image: {
@@ -252,7 +257,6 @@ const styles = StyleSheet.create({
     fontWeight: "700"
   },
   type: {
-    marginHorizontal: 30,
     color: "#aaa"
   },
   arrow: {
@@ -271,17 +275,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: -3,
     marginHorizontal: 5
-  },
-  detail: {
-    position: "relative",
-    backgroundColor: "#fff",
-    borderWidth: 2,
-    borderColor: "#ccc",
-    height: 80,
-    borderRadius: 10,
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 20
   },
   detail1: {
     flex: 3,

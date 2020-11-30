@@ -3,7 +3,7 @@ import { GET_USER, EDIT_USER_REQUEST, EDIT_USER_SUCCESS, EDIT_USER_FAILED, USER_
 import { URI } from '../../utils'
 
 export const getUser = token => async dispatch => {
-    const res = await Axios.get(`${URI}/user/getUser`, {
+    const res = await Axios.get(`${URI}/user`, {
         headers: {
             Authorization: `Bearer ${token}`
         }

@@ -11,7 +11,7 @@ export default {
   title: '#514F5B',
   dark: '#595959',
   dark2: '',
-  darkMed: '#7A7886',
+  darkMed: '#595959',
   darkGrey: '#6B6B6B',
 };
 

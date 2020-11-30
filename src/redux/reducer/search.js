@@ -1,8 +1,9 @@
-import { GET_COUNTRY } from '../type/search'
+import { GET_COUNTRY, FORM_FILL, SEARCH } from '../type/search'
 
 const initialState = {
     country: '',
-    data: []
+    data: [],
+    dataForm: {}
 }
 
 export default (state = initialState, action) => {
@@ -11,6 +12,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 country: action.payload
+            }
+        case SEARCH:
+            return {
+                ...state,
+                data: action.payload
+            }
+        case FORM_FILL:
+            return {
+                ...state,
+                dataForm: action.payload
             }
         default:
             return state

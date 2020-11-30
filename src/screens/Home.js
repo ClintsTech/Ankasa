@@ -64,7 +64,7 @@ const Home = ({ navigation }) => {
                             )}
                         </View>
                         <View style={{paddingHorizontal: 28, marginBottom: 20}}>
-                            <TouchableOpacity onPress={() => navigation.navigate('Search')} style={styles.search}>
+                            <View style={styles.search}>
                                 <View style={{position: 'absolute', top: 20, left: 15}}>
                                     <Search width={24} height={24} />
                                 </View>
@@ -77,7 +77,7 @@ const Home = ({ navigation }) => {
                                         onChangeText={text => setQuery(text)}
                                     />
                                 </View>
-                            </TouchableOpacity>
+                            </View>
                         </View>
                         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 28, marginBottom: 15}}>
                             <Text style={{fontSize: 20, color: '#000', fontWeight: 'bold'}}>Trending Destination</Text>
