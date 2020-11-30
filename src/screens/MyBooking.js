@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   ImageBackground,
   Text,
@@ -13,7 +13,8 @@ import Bell from '../assets/icons/bell.svg';
 import Plane from '../assets/icons/plane.svg';
 import Bg from './../assets/images/bg.png';
 import {RectButton, ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBooking } from '../redux/actions/booking'
 
 const DATA = [
   {
@@ -34,18 +35,17 @@ const DATA = [
   },
 ];
 
-const Item = ({title}) => (
-  <View>
-    <Text>{date}</Text>
-    <Text> {rute1} </Text>
-    <Text>{rute2}</Text>
-    <Text>{detail}</Text>
-    <Text>{status}</Text>
-  </View>
-);
-
 const MyBooking = ({ navigation }) => {
-  const { isLogin } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  const { isLogin, token } = useSelector(state => state.auth)
+  const { dataBooking } = useSelector(state => state.booking)
+
+  useEffect(() => {
+    if(isLogin) {
+      dispatch(getBooking(token))
+    }
+  }, [])
+
   const renderItem = ({item}) => (
     <RectButton onPress={() => navigation.navigate('BookingDetail')} style={{ marginBottom: 20}}>
       <ImageBackground

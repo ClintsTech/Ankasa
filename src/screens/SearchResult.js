@@ -41,7 +41,7 @@ const SearchResult = ({navigation}) => {
     const minute = date[1]
 
     return (
-        <TouchableOpacity onPress={() => onClick(item.flight_id)} style={{borderColor: '#C4C4C4', borderWidth: 1.5, borderRadius: 7.5, padding: 20}}>
+        <TouchableOpacity onPress={() => onClick(item.flight_id)} style={{borderColor: '#C4C4C4', borderWidth: 1.5, borderRadius: 7.5, padding: 20, marginBottom: 20}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <View style={{flexDirection: 'row'}}>
               <View style={{marginRight: 15}}>
@@ -112,7 +112,7 @@ const SearchResult = ({navigation}) => {
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20}}>
         <View style={{marginBottom: 10}}>
-          <Text style={styles.type}>6 flight found</Text>
+          <Text style={styles.type}>{data.length} flight found</Text>
         </View>
         <View style={{marginBottom: 10}}>
           <TouchableOpacity>

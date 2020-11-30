@@ -40,7 +40,15 @@ const Search = ({ navigation }) => {
     };
 
     const onSubmit = () => {
-        dispatch(formFill({
+        const dataForm = {
+            city_departure: data.city,
+            city_arrived: country.city,
+            departure: moment(date).format(moment.HTML5_FMT.DATE),
+            classs: checked,
+            seat: parseInt(child) + parseInt(adult)
+        }
+
+        dispatch(search(dataForm, {
             departure: moment(date).format('dddd') + ', ' + moment(date).format('LL'),
             class: checked,
             passengger: {
@@ -50,16 +58,7 @@ const Search = ({ navigation }) => {
             city_departure: data,
             city_arrived: country,
         }))
-        const dataForm = {
-            city_departure: data.city,
-            city_arrived: country.city,
-            departure: moment(date).format(moment.HTML5_FMT.DATE),
-            classs: checked,
-            seat: parseInt(child) + parseInt(adult)
-        }
-
         console.log(dataForm)
-        dispatch(search(dataForm))
         navigation.navigate('SearchResult')
     }
 

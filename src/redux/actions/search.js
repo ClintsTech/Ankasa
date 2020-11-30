@@ -9,12 +9,13 @@ export const getCountry = country => {
     }
 }
 
-export const search = data => async dispatch => {
+export const search = (data, dataform) => async dispatch => {
+    dispatch(formFill(dataform))
     try {
         const res = await axios.post(`${URI}/flight/search-flight`, data)
         dispatch({ type: SEARCH, payload: res.data.data })
     } catch (error) {
-        
+        console.log(error.message)
     }
 }
 

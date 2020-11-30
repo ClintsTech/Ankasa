@@ -6,6 +6,7 @@ import searchReducer from './search'
 import registerReducer from './register'
 import chatReducer from './chat'
 import flightReducer from './flights'
+import bookingReducer from './booking'
 
 export default combineReducers({
     auth: authReducer,
@@ -15,5 +16,5 @@ export default combineReducers({
     flight: flightReducer,
     destination: destinationReducer,
     chat: chatReducer,
-
+    booking: bookingReducer
 })

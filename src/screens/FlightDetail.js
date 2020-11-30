@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Dimensions,
   ImageBackground,
@@ -22,10 +22,22 @@ import style from '../helpers'
 
 import { FlatList, RectButton } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
+import { postBooking } from '../redux/actions/booking'
 
-const FlightDetail = () => {
+const FlightDetail = ({ navigation }) => {
   const { data } = useSelector(state => state.flight)
   const { dataForm } = useSelector(state => state.search)
+  const { token } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+
+  const onSubmit = () => {
+    dispatch(postBooking({
+      flight_id: data.flight_id,
+      seat: dataForm.passengger.child + dataForm.passengger.adult
+    }, token))
+
+    navigation.replace("MyBooking")
+  }
 
   return (
     <>
@@ -37,7 +49,6 @@ const FlightDetail = () => {
             <View style={{backgroundColor: style.primary, borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}>
             <ImageBackground imageStyle={{borderBottomLeftRadius: 30, borderBottomRightRadius: 30}}
             source={require('../assets/images/Plane.png')} style={styles.background}>
-              <Image source={{ uri: data.logo}} style={{position: 'absolute'}} />
               <Back style={{width: 20, height: 20, paddingVertical: 0, marginLeft: 20}}/>
             </ImageBackground>
             </View>
@@ -58,7 +69,7 @@ const FlightDetail = () => {
               </View>
 
               <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-                <Logo width={70} />
+              <Image source={{uri: data.logo}} style={{width: 75, height: 42.75}}/>
                 <View style={{flexDirection: 'column', justifyContent: 'center'}}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Rating />
@@ -160,7 +171,7 @@ const FlightDetail = () => {
                       <Text style={{ color: '#2395FF', fontWeight: 'bold', fontSize: 25}}>Rp. {data.price * (dataForm.passengger.child + dataForm.passengger.adult)}</Text>
                     </View>
 
-                    <RectButton style={{backgroundColor: '#2395FF', borderRadius: 10, width: '90%', alignSelf: 'center', height: 50, justifyContent: 'center', elevation: 5}}>
+                    <RectButton onPress={onSubmit} style={{backgroundColor: '#2395FF', borderRadius: 10, width: '90%', alignSelf: 'center', height: 50, justifyContent: 'center', elevation: 5}}>
                       <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15, alignSelf: 'center'}}>BOOK FLIGHT</Text>
                     </RectButton>
                 </View>

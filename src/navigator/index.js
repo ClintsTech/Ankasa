@@ -19,6 +19,7 @@ import CalendarLogo from '../assets/icons/calendar.svg'
 import ProfileLogoActive from '../assets/icons/useractive.svg'
 import CalendarLogoActive from '../assets/icons/calendaractive.svg'
 import Explore from '../assets/icons/explore.svg'
+import Fingerprint from '../screens/Fingerprint';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -145,6 +146,7 @@ export const PublicRoute = () => {
     <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
       <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
+      <Stack.Screen name="Fingerprint" component={Fingerprint} options={{headerShown: false}} />
       <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
       <Stack.Screen name="Home" component={HomeTab} options={{headerShown: false}} />
       <Stack.Screen name="Profile" component={ProfileTab} options={{headerShown: false}} />

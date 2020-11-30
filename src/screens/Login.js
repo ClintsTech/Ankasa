@@ -18,6 +18,7 @@ import GoogleIcon from '../assets/icons/google.svg';
 import FacebookIcon from '../assets/icons/facebook.svg';
 import TouchIcon from '../assets/icons/touch.svg';
 import Eye from '../assets/icons/view 1.svg';
+import { URI } from '../utils';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -115,13 +116,13 @@ const Login = ({navigation}) => {
                   }}></View>
                 <Text style={{textAlign: 'center'}}>or sign in with</Text>
                 <View style={styles.containerLogo}>
-                  <TouchableOpacity style={styles.logo}>
+                  <TouchableOpacity onPress={() => Linking.openURL(`http://192.168.1.4:8000/google`)} style={styles.logo}>
                     <GoogleIcon width={24} height={24} />
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.logo}>
+                  <TouchableOpacity onPress={() => Linking.openURL('http://192.168.1.4/facebook')} style={styles.logo}>
                     <FacebookIcon width={24} height={24} />
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.logo}>
+                  <TouchableOpacity onPress={() => navigation.navigate('Fingerprint')} style={styles.logo}>
                     <TouchIcon width={24} height={24} />
                   </TouchableOpacity>
                 </View>
