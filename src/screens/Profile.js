@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react'
-import {View, Text, Image, StyleSheet, StatusBar, SafeAreaView} from 'react-native';
-import {RectButton, ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import {Button, Card} from 'react-native-paper';
+import {View, Text, Image, StyleSheet, StatusBar, SafeAreaView, TouchableOpacity} from 'react-native';
+import {RectButton, ScrollView} from 'react-native-gesture-handler';
+import {Button, Card , Modal, Portal} from 'react-native-paper';
 import Star from '../assets/icons/star.svg';
 import Setting from '../assets/icons/setting.svg';
 import Logout from '../assets/icons/logout.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/actions/login'
-import { userLogout } from '../redux/actions/user'
+import { userLogout, editUser } from '../redux/actions/user'
 import style from '../helpers'
 import BottomSheet from 'reanimated-bottom-sheet'
 import Animated from 'react-native-reanimated'
@@ -16,10 +16,21 @@ import ImagePicker from 'react-native-image-picker';
 
 const Profile = ({ navigation }) => {
   const { data } = useSelector(state => state.user)
-  const { isLogin } = useSelector(state => state.auth)
+  const { isLogin, token } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const bs = useRef()
   const fall = new Animated.Value(1)
+  const [visible, SetVisible] = React.useState(false);
+  const [avatarSource, setAvatarSource] = React.useState(null);
+  const [uploadData, setUploadData] = React.useState(null);
+
+  const showModal = () => SetVisible(true);
+  const hideModal = () => SetVisible(false);
+
+  const uploadPhoto = () =>{
+    dispatch(editUser(uploadData, token))
+    hideModal()
+  } 
 
   const takePhotoFromCamera = () => {
     ImagePicker.launchCamera({
@@ -32,6 +43,9 @@ const Profile = ({ navigation }) => {
             name: response.fileName,
             type: response.type
         })
+        // dispatch(editUser(formData, token))
+        // setAvatarSource({uri:response.uri})
+        // showModal
     })
   }
     
@@ -46,7 +60,17 @@ const Profile = ({ navigation }) => {
             name: response.fileName,
             type: response.type
         })
-        
+        // dispatch(editUser(formData, token))
+       
+        if (response.didCancel){
+            console.log('User cancelled image picker');
+        }else if (response.error) {
+            console.log('Image Picker Error: ', response.error);
+          } else {
+            setAvatarSource({uri:response.uri})
+            setUploadData(formData)
+            showModal()
+          }
     })
   }
 
@@ -257,6 +281,41 @@ const renderContent = () => (
             renderHeader={renderHeader}
             renderContent={renderContent}
         />
+
+<Portal>
+        <Modal
+          visible={visible}
+          onDismiss={hideModal}
+          contentContainerStyle={{backgroundColor: 'white', paddingVertical: 30}}>
+          <Image
+            source={avatarSource === null ? {uri: data.photo} : avatarSource}
+            style={{width: '100%', height: '100%'}}
+          />
+          {/* <TouchableOpacity
+            style={{
+              backgroundColor: color.grey,
+              padding: 10,
+              marginVertical: 10,
+            }}
+            onPress={changePhoto}>
+            <Text style={{color: color.dark, alignSelf: 'center'}}>
+              Select Image
+            </Text>
+          </TouchableOpacity> */}
+          
+          <TouchableOpacity
+            style={{
+              backgroundColor: style.primary,
+              paddingVertical: 10,
+            }}
+            onPress={uploadPhoto}>
+            <Text style={{color: style.white, alignSelf: 'center'}}>
+              Upload
+            </Text>
+          </TouchableOpacity> 
+        </Modal>
+      </Portal>
+    
       </>
   )
 };
