@@ -45,6 +45,7 @@ const Home = ({ navigation }) => {
     
     return (
         <>
+            <StatusBar backgroundColor={style.white} barStyle="dark-content" />
             <SafeAreaView>
                 <ScrollView style={{height: '100%', backgroundColor:style.white }}>
                     <View>
@@ -104,22 +105,21 @@ const Home = ({ navigation }) => {
                         <View>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} scrollEventThrottle={200} 
                         decelerationRate="fast" contentContainerStyle={{ marginTop:10, paddingLeft: 28}}>
-                            
-                            <View style={{flexDirection: 'column', marginRight: 10}}>
-                            <TouchableHighlight style={[styles.ImgContainer, { borderColor: '#2395FF', borderWidth: 4}]}>
-                                <Image source={{uri: 'https://www.colorado.com/sites/default/files/styles/1000x685/public/Ouray_June_MarkusVanMeterPhotography.jpg?itok=0IlEH-qB'}} 
-                                style={{width: 60, height: 60, borderRadius: 100}}/>
-                            </TouchableHighlight>
-                            <Text style={{textAlign: 'center', marginTop: 5}}>PARIS</Text>
-                            </View>
-
-                            <View style={{flexDirection: 'column', marginRight: 10}}>
-                            <TouchableHighlight style={[styles.ImgContainer, { borderColor: '#2395FF', borderWidth: 4}]}>
-                                <Image source={{uri: 'https://www.colorado.com/sites/default/files/styles/1000x685/public/Ouray_June_MarkusVanMeterPhotography.jpg?itok=0IlEH-qB'}} 
-                                style={{width: 60, height: 60, borderRadius: 100}}/>
-                            </TouchableHighlight>
-                            <Text style={{textAlign: 'center', marginTop: 5}}>PARIS</Text>
-                            </View>
+                            {destination.data ? destination.data.map((item, index) => {
+                                if(index < 10) {
+                                    return (
+                                        <View style={{flexDirection: 'column', marginRight: 10}}>
+                                            <TouchableHighlight style={[styles.ImgContainer, { borderColor: '#2395FF', borderWidth: 4}]}>
+                                                <Image source={{uri: item.img}} 
+                                                style={{width: 60, height: 60, borderRadius: 100}}/>
+                                            </TouchableHighlight>
+                                            <Text style={{textAlign: 'center', marginTop: 5}}>{item.city}</Text>
+                                        </View>
+                                    )
+                                } else {
+                                    <Text></Text>
+                                }
+                            }) : <Text></Text>}
                             
                         </ScrollView>
                         </View>

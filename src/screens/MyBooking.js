@@ -15,25 +15,9 @@ import Bg from './../assets/images/bg.png';
 import {RectButton, ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBooking } from '../redux/actions/booking'
-
-const DATA = [
-  {
-    id: '1',
-    date: 'Monday, 20 July ‘20 - 12:33',
-    rute1: 'IDN',
-    rute2: 'JPN',
-    detail: 'Garuda Indonesia, AB-221',
-    status: 'Waiting for payment',
-  },
-  {
-    id: '1',
-    date: 'Monday, 20 July ‘20 - 12:33',
-    rute1: 'IDN',
-    rute2: 'JPN',
-    detail: 'Garuda Indonesia, AB-221',
-    status: 'Eticked issued',
-  },
-];
+import moment from 'moment'
+import 'moment/locale/en-gb'
+moment.locale('en-gb')
 
 const MyBooking = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -60,15 +44,15 @@ const MyBooking = ({ navigation }) => {
             marginRight: 20,
             marginLeft: 20,
           }}>
-          <Text>{item.date}</Text>
+          <Text>{moment(item.departure).format('LLLL')}</Text>
           <View style={{flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
             <Text style={{fontWeight: 'bold', fontSize: 20, marginRight: 20}}>
-              {item.rute1}
+              {item.city_departure}
             </Text>
             <Plane width={20} height={20} style={{marginRight: 20, top: 3}} />
-            <Text style={{fontWeight: 'bold', fontSize: 20}}>{item.rute2}</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 20}}>{item.city_arrived}</Text>
           </View>
-          <Text style={{color: '#979797'}}>{item.detail}</Text>
+          <Text style={{color: '#979797'}}>{item.plane}, {item.code}</Text>
         </View>
         <View
           style={{
@@ -96,7 +80,7 @@ const MyBooking = ({ navigation }) => {
           <RectButton
             style={{
               justifyContent: 'center',
-              backgroundColor: '#FF7F23',
+              backgroundColor: item.isPaid === 0 ? '#FF7F23' : '#4FCF4D',
               borderRadius: 10,
               width: 180,
               height: 40,
@@ -108,7 +92,7 @@ const MyBooking = ({ navigation }) => {
                 fontSize: 15,
                 fontWeight: 'bold',
               }}>
-              {item.status}
+              {item.isPaid === 0 ? 'Waiting for payment' : 'Eticket issued'}
             </Text>
           </RectButton>
         </View>
@@ -146,7 +130,7 @@ const MyBooking = ({ navigation }) => {
         </View>
 
         <FlatList
-          data={DATA}
+          data={dataBooking.data}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />
