@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, StatusBar, StyleSheet, Text, TextInput, View, ImageBackground } from 'react-native'
-import { RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import { SafeAreaView, StatusBar, StyleSheet, Text, TextInput, View, ImageBackground, Image } from 'react-native'
+import { RectButton, ScrollView, TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler'
 import style from '../helpers'
 import Bell from '../assets/icons/bell.svg'
 import Mail from '../assets/icons/mail.svg'
@@ -96,19 +96,54 @@ const Home = ({ navigation }) => {
                                 renderItem={renderItems}
                             />
                         </View>
-                        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 28, marginBottom: 15}}>
-                            <Text style={{fontSize: 20, color: '#000', fontWeight: 'bold'}}>Top 10 destination</Text>
+
+                        <View style={{marginBottom: 15}}>
+
+                        <Text style={{paddingHorizontal: 28, fontSize: 20, color: '#000', fontWeight: 'bold'}}>Top 10 destination</Text>
+                        
+                        <View>
+                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} scrollEventThrottle={200} 
+                        decelerationRate="fast" contentContainerStyle={{ marginTop:10, paddingLeft: 28}}>
+                            
+                            <View style={{flexDirection: 'column', marginRight: 10}}>
+                            <TouchableHighlight style={[styles.ImgContainer, { borderColor: '#2395FF', borderWidth: 4}]}>
+                                <Image source={{uri: 'https://www.colorado.com/sites/default/files/styles/1000x685/public/Ouray_June_MarkusVanMeterPhotography.jpg?itok=0IlEH-qB'}} 
+                                style={{width: 60, height: 60, borderRadius: 100}}/>
+                            </TouchableHighlight>
+                            <Text style={{textAlign: 'center', marginTop: 5}}>PARIS</Text>
+                            </View>
+
+                            <View style={{flexDirection: 'column', marginRight: 10}}>
+                            <TouchableHighlight style={[styles.ImgContainer, { borderColor: '#2395FF', borderWidth: 4}]}>
+                                <Image source={{uri: 'https://www.colorado.com/sites/default/files/styles/1000x685/public/Ouray_June_MarkusVanMeterPhotography.jpg?itok=0IlEH-qB'}} 
+                                style={{width: 60, height: 60, borderRadius: 100}}/>
+                            </TouchableHighlight>
+                            <Text style={{textAlign: 'center', marginTop: 5}}>PARIS</Text>
+                            </View>
+                            
+                        </ScrollView>
+                        </View>
+
                         </View>
                     </View>
                 </ScrollView>
+
             </SafeAreaView>
         </>
     )
 }
 
+
 export default Home
 
 const styles = StyleSheet.create({
+    ImgContainer: {
+        width: 60, 
+        height: 60, 
+        borderRadius: 100,
+        overflow: 'hidden',
+        justifyContent:'center'
+      },
     search: {
         backgroundColor: style.grey,
         borderRadius: 10,
