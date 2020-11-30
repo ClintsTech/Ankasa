@@ -92,7 +92,7 @@ const ProfileTab = () => {
             )
           } else {
             return (
-              <Profile />
+              <ProfileLogo />
             )
           }
         }
@@ -131,7 +131,7 @@ const BookingTab = () => {
             )
           } else {
             return (
-              <Profile />
+              <ProfileLogo />
             )
           }
         }

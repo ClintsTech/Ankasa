@@ -51,7 +51,7 @@ export const editUser = (data, token) => async dispatch => {
 // export const editPhoto = (data, token) => async dispatch => {
 //     dispatch(editUserRequest())
 //     try {
-//         const res = await Axios.patch(`${URI}/users`, data, {
+//         const res = await Axios.patch(`${URI}/user/update`, data, {
 //             headers: {
 //                 Authorization: `Bearer ${token}`,
 //                 'Content-Type': 'multipart/form-data',
