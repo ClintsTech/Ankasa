@@ -32,7 +32,6 @@ const Profile = ({ navigation }) => {
             name: response.fileName,
             type: response.type
         })
-        dispatch(editPhoto(formData, token))
     })
   }
     
@@ -47,7 +46,7 @@ const Profile = ({ navigation }) => {
             name: response.fileName,
             type: response.type
         })
-        dispatch(editPhoto(formData, token))
+        
     })
   }
 

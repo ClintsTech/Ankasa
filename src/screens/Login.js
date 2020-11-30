@@ -6,6 +6,7 @@ import {
   ScrollView,
   SafeAreaView,
   StatusBar,
+  Linking
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../redux/actions/login';

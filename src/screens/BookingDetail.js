@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
-import Bg from './../assets/images/bg-long.png';
+import Bg from './../assets/images/ticketBackground.png';
 import Logo from './../assets/images/garuda.svg';
 import Plane from '../assets/icons/plane.svg';
 import { RectButton, TouchableOpacity } from 'react-native-gesture-handler';
@@ -22,13 +22,13 @@ const BookingDetail = ({navigation}) => {
   return (
     <>
         <StatusBar barStyle="white" backgroundColor="#2395FF" />
-        <SafeAreaView style={{paddingHorizontal: 10, paddingVertical: 10, backgroundColor: "#2395FF"}}>
+        <SafeAreaView style={{paddingHorizontal: 10, paddingTop: 40, backgroundColor: "#2395FF"}}>
 
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <TouchableOpacity flex={1} onPress={() => navigation.goBack()}>
                 <Back width={29} height={29} />
             </TouchableOpacity>
-            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15, paddingRight: 130, top: 3}}>Booking Pass</Text>
+            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 24, paddingRight: 130, top: 3}}>Booking Pass</Text>
             <IconOption width={29} height={29} />
         </View>
 
@@ -104,7 +104,8 @@ const BookingDetail = ({navigation}) => {
                 value={text}
                 size={120}
                 bgColor='black'
-                fgColor='white'/>
+                fgColor='white'  
+              />
               </View>
               </View>
 
