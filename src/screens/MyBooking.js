@@ -111,21 +111,50 @@ const MyBooking = ({ navigation }) => {
   if(!isLogin) {
     return (
       <>
-        <StatusBar />
+         <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
         <ScrollView style={{backgroundColor: 'white', height: '100%'}}>
           <View style={{paddingBottom: 30}}>
+
             <View
               style={{
                 paddingVertical: 30,
                 marginLeft: 20,
-                marginRight: 20,
-                flexDirection: 'row',
-              }}>
-              <Text style={{fontSize: 40, fontWeight: 'bold'}}>My Booking</Text>
+                marginRight: 20,}}>
+
+              <Text style={{fontSize: 40, fontWeight: 'bold'}}>MyBooking</Text>
+
+              <View style={{marginVertical: '50%'}}>
+
+                <Button
+                  onPress={() => navigation.navigate('SignUp')}
+                  style={{
+                    justifyContent: 'center',
+                    backgroundColor: '#2395FF',
+                    borderRadius: 10,
+                    height: 60,
+                    elevation: 5
+                  }}>
+                  <Text style={{color: 'white', margin: '40%'}}>
+                    Create My Account
+                  </Text>
+                </Button>
+                <Button
+                  onPress={() => navigation.navigate('Login')}
+                  mode="outlined"
+                  style={{
+                    justifyContent: 'center',
+                    borderRadius: 10,
+                    height: 60,
+                    marginTop: 20,
+                    marginBottom: 20,
+                    borderWidth: 1
+                  }}>
+                  <Text style={{color: '#2395FF', margin: '50%'}}>Sign In</Text>
+                </Button>
+              </View>
+
             </View>
-            <Button onPress={() => navigation.navigate('Login')}>
-              <Text>Login</Text>
-            </Button>
+            
           </View>
         </ScrollView>
       </>

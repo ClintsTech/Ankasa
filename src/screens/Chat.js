@@ -21,15 +21,21 @@ import {
   sendingMessageSuccess,
   postMessage,
 } from '../redux/actions/chat';
+import { baseURI } from '../utils'
 
-const Chat = () => {
-  const [id, setId] = React.useState(1);
+const Chat = ({navigation, route}) => {
+  // const [id, setId] = React.useState(1);
+  
+  const { id } = route.params
   // const [chat, setChat] = React.useState('');
   const [message, setMessage] = React.useState('');
   const dispatch = useDispatch();
   const {allMessage} = useSelector((state) => state.chat);
-  const socket = io('http://192.168.43.149:8000');
+  const { data } = useSelector((state) => state.user);
+  const socket = io(baseURI, {query:{id}});
+  
   React.useEffect(() => {
+    
     dispatch(getAllMessages(socket));
     if (socket == null) return;
 
@@ -44,12 +50,13 @@ const Chat = () => {
   }, []);
 
   const onSubmit = () => {
-    const data = {
-      id_from: '1',
-      id_to: '2',
+    // const id_user = id
+    const dataMessage = {
+      id_from: data.id,
+      id_to: data.role === 6? id:'1',
       message: message,
     };
-    dispatch(postMessage(socket, data));
+    dispatch(postMessage(socket, dataMessage));
     setMessage('');
   };
   const Item = ({message, time}) => (
@@ -72,10 +79,19 @@ const Chat = () => {
   );
 
   const renderItem = ({item}) => {
-    if (item.id_from === id) {
-      return <Item message={item.message} time={item.time} />;
-    } else {
-      return <IncommingItem message={item.message} time={item.time} />;
+    
+    if (data.role == 6){
+      if (item.id_from === data.id) {
+        return <IncommingItem message={item.message} time={item.time} />;
+      } else {
+        return <Item message={item.message} time={item.time} />;
+      }
+    }else{
+      if (item.id_from === id) {
+        return <Item message={item.message} time={item.time} />;
+      } else {
+        return <IncommingItem message={item.message} time={item.time} />;
+      }
     }
   };
   return (
