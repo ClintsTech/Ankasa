@@ -7,6 +7,8 @@ import registerReducer from './register'
 import chatReducer from './chat'
 import flightReducer from './flights'
 import bookingReducer from './booking'
+import notificationReducer from './notification'
+import forgotReducer from './forgot'
 
 export default combineReducers({
     auth: authReducer,
@@ -16,5 +18,7 @@ export default combineReducers({
     flight: flightReducer,
     destination: destinationReducer,
     chat: chatReducer,
-    booking: bookingReducer
+    booking: bookingReducer,
+    notification: notificationReducer,
+    forgot: forgotReducer
 })

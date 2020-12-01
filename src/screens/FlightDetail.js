@@ -37,7 +37,7 @@ const FlightDetail = ({ navigation }) => {
       fee: data.price * (dataForm.passengger.child + dataForm.passengger.adult)
     }, token))
 
-    navigation.replace("MyBooking")
+    navigation.replace("Booking")
   }
 
   return (

@@ -53,7 +53,7 @@ export const login = (data) => async (dispatch) => {
     }
     dispatch(loginSuccess(res.data.data.token));
   } catch (error) {
-    dispatch(loginFailed(error.response));
+    dispatch(loginFailed(error));
   }
 };
 

@@ -38,6 +38,7 @@ const Profile = ({navigation}) => {
   const uploadPhoto = () => {
     dispatch(editUser(uploadData, token));
     hideModal();
+    bs.current.snapTo(1)
   };
 
   const takePhotoFromCamera = () => {
@@ -365,6 +366,7 @@ const Profile = ({navigation}) => {
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                  onPress={() => navigation.navigate('Settings')}
                   style={{flexDirection: 'row', paddingTop: 20}}>
                   <Setting width={24} height={24} />
                   <Text

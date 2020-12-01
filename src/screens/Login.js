@@ -91,6 +91,7 @@ const Login = ({navigation}) => {
                   Did you forgot your password?
                 </Text>
                 <TouchableOpacity
+                  onPress={() => navigation.navigate('Forgot')}
                   style={{
                     borderBottomWidth: 0.5,
                     borderBottomColor: style.primary,

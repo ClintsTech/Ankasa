@@ -29,6 +29,9 @@ const Home = ({ navigation }) => {
     const renderItems = ({ item, index }) => {
         return (
             <RectButton onPress={() => {
+                if(!isLogin) {
+                    return navigation.navigate('Login')
+                }
                 dispatch(getCountry(item))
                 navigation.navigate('Search')
             }} style={{ borderRadius: 10}}>

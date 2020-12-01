@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Text,
   View,
@@ -10,9 +10,47 @@ import {
 } from 'react-native';
 import style from '../helpers';
 import Back from '../assets/icons/btnback.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNotif, clearNotif, readNotif } from '../redux/actions/notification'
+import { FlatList } from 'react-native-gesture-handler';
+import moment from 'moment'
 
 const Notifications = ({ navigation }) => {
-    const [isActive, setIsActive] = React.useState(true)
+  const dispatch = useDispatch()
+  const { dataNotification } = useSelector(state => state.notification)
+  const { token } = useSelector(state => state.auth)
+
+  useEffect(() => {
+    dispatch(getNotif(token))
+  }, [dispatch, dataNotification])
+
+  const read = (id, isRead) => {
+    if(!isRead) {
+      dispatch(readNotif(id, token))
+    }
+  }
+
+  const clear = () => {
+    dispatch(clearNotif(token))
+  }
+
+  const renderItems = ({ item, index }) => {
+    return (
+      <TouchableOpacity onPress={() => read(item.id, item.isRead)} style={item.isRead ? styles.cardInactive : styles.cardActive}>
+        <Text
+          style={
+            item.isRead ? styles.cardTitleInacive : styles.cardTitleAcive
+          }>
+          {item.tittle}
+        </Text>
+        <Text style={styles.cardBody}>
+          {item.description}
+        </Text>
+        <Text style={styles.cardBody}>{moment(item.time).format('llll')}</Text>
+      </TouchableOpacity>
+    )
+  }
+
   return (
     <>
       <SafeAreaView>
@@ -28,50 +66,16 @@ const Notifications = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                   <Back width={24} height={24} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => alert('clearrr')}>
+                <TouchableOpacity onPress={clear}>
                   <Text style={styles.textNavigator}>Clear</Text>
                 </TouchableOpacity>
               </View>
               <Text style={styles.title}>Notifications</Text>
-              <View style={isActive ? styles.cardActive : styles.cardInactive}>
-                <Text
-                  style={
-                    isActive ? styles.cardTitleAcive : styles.cardTitleInacive
-                  }>
-                  Congratulations
-                </Text>
-                <Text style={styles.cardBody}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore....
-                </Text>
-                <Text style={styles.cardBody}>5h ago</Text>
-              </View>
-              <View style={isActive ? styles.cardActive : styles.cardInactive}>
-                <Text
-                  style={
-                    isActive ? styles.cardTitleAcive : styles.cardTitleInacive
-                  }>
-                  Congratulations
-                </Text>
-                <Text style={styles.cardBody}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore....
-                </Text>
-                <Text style={styles.cardBody}>5h ago</Text>
-              </View>
-              <View style={isActive ? styles.cardActive : styles.cardInactive}>
-                <Text
-                  style={
-                    isActive ? styles.cardTitleAcive : styles.cardTitleInacive
-                  }>
-                  Congratulations
-                </Text>
-                <Text style={styles.cardBody}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore....
-                </Text>
-                <Text style={styles.cardBody}>5h ago</Text>
-              </View>
+              <FlatList 
+                data={dataNotification}
+                keyExtractor={item => item.id}
+                renderItem={renderItems}
+              />
             </View>
           </ScrollView>
         </View>
@@ -83,7 +87,7 @@ const Notifications = ({ navigation }) => {
 export default Notifications;
 
 const styles = StyleSheet.create({
-  container: {height: '100%', backgroundColor: style.white, paddingTop: 10},
+  container: {height: '100%', backgroundColor: style.white, paddingVertical: 30},
   title: {fontWeight: 'bold', fontSize: 30},
   body: {marginHorizontal: 20},
   cardActive: {

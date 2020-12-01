@@ -68,8 +68,8 @@ const Search = ({ navigation }) => {
                 child: parseInt(child),
                 adult: parseInt(adult)
             },
-            city_departure: switched ? data : country,
-            city_arrived: switched ? country : data,
+            city_departure: switched ? country : data,
+            city_arrived: switched ? data : country,
         }))
         console.log(dataForm)
         navigation.navigate('SearchResult')
@@ -124,7 +124,7 @@ const Search = ({ navigation }) => {
                     </View>
                     {transit ? (
                         <View style={{paddingHorizontal: 28, marginBottom: 20}}>
-                            <Text style={{color: style.darkGrey, fontSize: 16, fontWeight: '900', marginBottom: 10}}>Arrive</Text>
+                            <Text style={{color: style.darkGrey, fontSize: 16, fontWeight: '900', marginBottom: 10}}>Return</Text>
                             <TouchableOpacity onPress={() => setDatePickerArriveVisibility(true)} style={styles.btndate}>
                                 <Text style={{color: style.dark, fontWeight: 'bold'}}>{moment(dateArrive).format('dddd') + ', ' + moment(dateArrive).format('LL')}</Text>
                                 <IconRight />

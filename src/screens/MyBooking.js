@@ -7,6 +7,7 @@ import {
   FlatList,
   StyleSheet,
   SafeAreaView,
+  Linking,
 } from 'react-native';
 import Mail from '../assets/icons/mail.svg';
 import Bell from '../assets/icons/bell.svg';
@@ -18,12 +19,14 @@ import { getBooking, getBookingById } from '../redux/actions/booking'
 import moment from 'moment'
 import 'moment/locale/en-gb'
 import { Button } from 'react-native-paper';
+import { URI } from '../utils';
 moment.locale('en-gb')
 
 const MyBooking = ({ navigation }) => {
   const dispatch = useDispatch()
   const { isLogin, token } = useSelector(state => state.auth)
   const { dataBooking } = useSelector(state => state.booking)
+  const { data } = useSelector(state => state.user)
 
   useEffect(() => {
     if(isLogin) {
@@ -35,7 +38,13 @@ const MyBooking = ({ navigation }) => {
     if(isPaid) {
       dispatch(getBookingById(id, token))
       navigation.navigate('BookingDetail')
+    } else {
+      Linking.openURL(`${URI}/payment`)
     }
+  }
+
+  const navigatorChat = () =>{
+    data.role == 6 ? navigation.navigate('Room'):navigation.navigate('Chat', {id:data.id})
   }
 
   const renderItem = ({item}) => (
@@ -178,7 +187,7 @@ const MyBooking = ({ navigation }) => {
             <Text style={{fontSize: 36, color: '#000', fontWeight: 'bold'}}>My Booking</Text>
             {isLogin ? (
                 <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity onPress={()=>navigation.navigate('Room')}>
+                    <TouchableOpacity onPress={navigatorChat}>
                         <Mail width={24} height={24} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.navigate('Notifications')}>

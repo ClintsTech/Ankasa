@@ -14,7 +14,8 @@ import FlightDetail from '../screens/FlightDetail'
 import BookingDetail from '../screens/BookingDetail'
 import SearchResult from '../screens/SearchResult'
 import Edit from '../screens/EditProfile'
-// import Room from '../screens/RoomChat'
+import Settings from '../screens/Settings'
+import Password from '../screens/ChangePassword'
 import Fingerprint from '../screens/Fingerprint';
 
 import ProfileLogo from '../assets/icons/user.svg'
@@ -23,6 +24,9 @@ import ProfileLogoActive from '../assets/icons/useractive.svg'
 import CalendarLogoActive from '../assets/icons/calendaractive.svg'
 import Explore from '../assets/icons/explore.svg'
 import RoomChat from '../screens/RoomChat';
+import AddTouch from '../screens/AddFingerprint';
+import Forgot from '../screens/Forgot';
+import ResetPassword from '../screens/ResetPassword';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -150,6 +154,8 @@ export const PublicRoute = () => {
       <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
       <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}} />
       <Stack.Screen name="Fingerprint" component={Fingerprint} options={{headerShown: false}} />
+      <Stack.Screen name="Forgot" component={Forgot} options={{headerShown: false}} />
+      <Stack.Screen name="Reset" component={ResetPassword} options={{headerShown: false}} />
       <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
       <Stack.Screen name="Home" component={HomeTab} options={{headerShown: false}} />
       <Stack.Screen name="Profile" component={ProfileTab} options={{headerShown: false}} />
@@ -172,6 +178,9 @@ export const PrivateRoute = () => {
       <Stack.Screen name="FlightDetail" component={FlightDetail} options={{headerShown: false}} />
       <Stack.Screen name="BookingDetail" component={BookingDetail} options={{headerShown: false}} />
       <Stack.Screen name="Edit" component={Edit} options={{headerShown: false}} />
+      <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
+      <Stack.Screen name="Password" component={Password} options={{headerShown: false}} />
+      <Stack.Screen name="AddTouch" component={AddTouch} options={{headerShown: false}} />
     </Stack.Navigator>
   )
 }

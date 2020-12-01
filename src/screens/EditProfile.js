@@ -162,7 +162,10 @@ const Edit = ({ navigation }) => {
             label='Country'
             data={countries}
             value={country}
-            onChangeText={text => setCountry(text)}
+            onChangeText={text => {
+              setCountry(text)
+              setCity('')
+            }}
             useNativeDriver={true}
           />
           {selectedCountry ? (

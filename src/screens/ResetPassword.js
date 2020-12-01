@@ -3,13 +3,8 @@ import {View, Text, TextInput, StyleSheet} from 'react-native';
 import {RectButton, TouchableOpacity} from 'react-native-gesture-handler';
 import style from '../helpers';
 import Back from '../assets/icons/btnback.svg';
-import { useDispatch } from 'react-redux';
 
-const Forgot = ({navigation}) => {
-  const onSubmit = () => {
-    navigation.navigate('Reset')
-  }
-
+const ResetPassword = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -23,13 +18,20 @@ const Forgot = ({navigation}) => {
           </Text>
           <TextInput
             style={{marginTop: 30}}
-            placeholder="Email"
+            placeholder="New Password"
             underlineColorAndroid="#9B96AB"
+            secureTextEntry={true}
+          />
+          <TextInput
+            style={{marginTop: 30}}
+            placeholder="Repeat Password"
+            underlineColorAndroid="#9B96AB"
+            secureTextEntry={true}
           />
         </View>
 
         <View style={{marginTop: 20}}>
-          <RectButton onPress={onSubmit} style={styles.button}>
+          <RectButton style={styles.button}>
             <Text
               style={{
                 textAlign: 'center',
@@ -42,7 +44,7 @@ const Forgot = ({navigation}) => {
           </RectButton>
 
           <Text style={{textAlign: 'center', marginTop: 20, color: '#595959'}}>
-            You’ll get message soon on your email
+            Reset your password
           </Text>
         </View>
       </View>
@@ -50,7 +52,7 @@ const Forgot = ({navigation}) => {
   );
 };
 
-export default Forgot;
+export default ResetPassword;
 
 const styles = StyleSheet.create({
   container: {
