@@ -14,7 +14,7 @@ import Plane from '../assets/icons/plane.svg';
 import Bg from './../assets/images/bg.png';
 import {RectButton, ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBooking } from '../redux/actions/booking'
+import { getBooking, getBookingById } from '../redux/actions/booking'
 import moment from 'moment'
 import 'moment/locale/en-gb'
 import { Button } from 'react-native-paper';
@@ -31,8 +31,15 @@ const MyBooking = ({ navigation }) => {
     }
   }, [])
 
+  const onClick = (id, isPaid) => {
+    if(isPaid) {
+      dispatch(getBookingById(id, token))
+      navigation.navigate('BookingDetail')
+    }
+  }
+
   const renderItem = ({item}) => (
-    <RectButton onPress={() => navigation.navigate('BookingDetail')} style={{ marginBottom: 20}}>
+    <RectButton onPress={() => onClick(item.id, item.isPaid)} style={{ marginBottom: 20}}>
       <ImageBackground
         source={Bg}
         style={{width: '100%', height: 230}}

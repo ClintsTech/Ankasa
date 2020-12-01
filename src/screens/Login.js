@@ -19,6 +19,7 @@ import FacebookIcon from '../assets/icons/facebook.svg';
 import TouchIcon from '../assets/icons/touch.svg';
 import Eye from '../assets/icons/view 1.svg';
 import { URI } from '../utils';
+import { WebView } from 'react-native-webview'
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -116,7 +117,8 @@ const Login = ({navigation}) => {
                   }}></View>
                 <Text style={{textAlign: 'center'}}>or sign in with</Text>
                 <View style={styles.containerLogo}>
-                  <TouchableOpacity onPress={() => Linking.openURL(`http://192.168.1.4:8000/google`)} style={styles.logo}>
+                  <TouchableOpacity style={styles.logo}>
+                    {/* <WebView source={{uri: 'http://192.168.1.4:8000/google'}} /> */}
                     <GoogleIcon width={24} height={24} />
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => Linking.openURL('http://192.168.1.4/facebook')} style={styles.logo}>

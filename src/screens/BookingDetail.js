@@ -14,10 +14,16 @@ import { RectButton, TouchableOpacity } from 'react-native-gesture-handler';
 import QRCode from 'react-native-qrcode-svg';
 import Back from '../assets/icons/btnback-white.svg';
 import IconOption from '../assets/icons/iconOption.svg';
+import { useSelector } from 'react-redux';
+import moment from 'moment'
+import 'moment/locale/en-gb'
+moment.locale('en-gb')
 
 const BookingDetail = ({navigation}) => {
 
   const text = 'http://facebook.github.io/react-native/'
+
+  const { specificBooking } = useSelector(state => state.booking)
 
   return (
     <>
@@ -36,11 +42,11 @@ const BookingDetail = ({navigation}) => {
             <ImageBackground source={Bg} style={{flexDirection: 'column', width: 300, height: '90%' ,resizeMode: 'cover'}}>
               
               <View flex={1} style={{alignItems: 'center', marginTop: 20}}>
-                <Logo width={100} height={90} />
+                <Image source={{uri: specificBooking.image}} style={{width: 100, height: 70}} />
                 <View style={{flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
                   <Text
                     style={{fontWeight: 'bold', fontSize: 30, marginRight: 20}}>
-                      JPN
+                      {specificBooking.city_departure}
                   </Text>
                   <Plane
                     width={20}
@@ -48,7 +54,7 @@ const BookingDetail = ({navigation}) => {
                     style={{marginRight: 20, top: 10}}
                   />
                   <Text style={{fontWeight: 'bold', fontSize: 30}}>
-                    JPN
+                    {specificBooking.city_arrived}
                   </Text>
                 </View>
                 <RectButton
@@ -78,25 +84,25 @@ const BookingDetail = ({navigation}) => {
               <View  style={{flexDirection: 'row', alignSelf: 'center'}}>
                <View style={{paddingRight: 20}}>
                   <Text style={{color: '#A5A5A5'}} >Code</Text>
-                  <Text style={{fontSize: 15, color: '#595959', fontWeight: 'bold'}}>AB-221</Text>
+                  <Text style={{fontSize: 15, color: '#595959', fontWeight: 'bold'}}>{specificBooking.code}</Text>
                 </View>
                 <View style={{paddingRight: 20}}>
                   <Text style={{color: '#A5A5A5'}} >Class</Text>
-                  <Text style={{fontSize: 15, color: '#595959', fontWeight: 'bold'}}>Economy</Text>
+                  <Text style={{fontSize: 15, color: '#595959', fontWeight: 'bold'}}>{specificBooking.class}</Text>
                 </View>
                 <View style={{paddingRight: 20}}>
                   <Text style={{color: '#A5A5A5'}} >Terminal</Text>
-                  <Text style={{fontSize: 15, color: '#595959', fontWeight: 'bold'}}>A</Text>
+                  <Text style={{fontSize: 15, color: '#595959', fontWeight: 'bold'}}>{specificBooking.terminal}</Text>
                 </View>
                 <View >
                   <Text style={{color: '#A5A5A5'}} >Gate</Text>
-                  <Text style={{fontSize: 15, color: '#595959', fontWeight: 'bold'}}>221</Text>
+                  <Text style={{fontSize: 15, color: '#595959', fontWeight: 'bold'}}>{specificBooking.gate}</Text>
                 </View>
               </View>
 
               <View style={{paddingTop: 30}}>
                 <Text style={{color: '#A5A5A5'}} >Departure</Text>
-                <Text style={{ color: '#595959', fontSize: 15, paddingTop: 4}}>Monday, 20 July '20-12:33</Text>
+                <Text style={{ color: '#595959', fontSize: 15, paddingTop: 4}}>{moment(specificBooking.departure).format('LLLL')}</Text>
               </View>
 
               <View style={{alignSelf: 'center', paddingTop: 20, paddingBottom: 20}}>

@@ -18,6 +18,7 @@ import Back from './../assets/icons/btnback.svg'
 import { useSelector, useDispatch } from "react-redux";
 import { editUser } from '../redux/actions/user'
 import axios from 'axios'
+import {Dropdown} from "react-native-material-dropdown"
 
 const Edit = ({ navigation }) => {
   const inputPhone = React.useRef();
@@ -34,30 +35,60 @@ const Edit = ({ navigation }) => {
   const [name, setName] = React.useState(data.name);
   const [address, setAddress] = React.useState(data.address);
   const [postCode, setPostCode] = React.useState(null);
-  const [city, setCity] = useState(data.city)
+  const [city, setCity] = useState(data.city || '')
+  const [country, setCountry] = useState(data.country || '')
   const [countries, setCountries] = useState([])
+  const [cities, setCities] = useState([])
+  const [selectedCountry, setSelectedCountry] = useState(false)
 
   const getcountry = async() => {
     const res = await axios.get('https://countriesnow.space/api/v0.1/countries')
 
-    setCountries(res.data.data)
+    const country = res.data.data.map(item => {
+      return {
+        label: item.country,
+        value: item.country
+      }
+    })
+
+    setCountries(country)
+  }
+
+  const getCities = async(country) => {
+    console.log(country)
+    const res = await axios.post('https://countriesnow.space/api/v0.1/countries/cities', {country: country})
+    console.log(res)
+
+    const city = res.data.data.map(item => {
+      return {
+        label: item,
+        value: item
+      }
+    })
+
+    setCities(city)
   }
 
   useEffect(() => {
     getcountry()
   }, [])
 
-  const DATA = [
-    { city: 'medan'},
-    { city: 'jakarta'},
-    {city: 'bali'}
-  ];
+  useEffect(() => {
+    if(country) {
+      setSelectedCountry(true)
+      getCities(country)
+    } else {
+      setSelectedCountry(false)
+      setCities([])
+    }
+  }, [country, setCountry])
 
   const onSubmit = () => {
     dispatch(editUser({
       email,
       phone: parseInt(phone),
-      name
+      name,
+      address: `${city}, ${country}`
     }, token))
 
     if(isEditSuccess) {
@@ -127,13 +158,26 @@ const Edit = ({ navigation }) => {
           </View>
           <View>
 
-          <Text style={styles.textTop}>City</Text>
+          <Text style={styles.textTop}>Country</Text>
           
-          <Autocomplete
-              data={countries}
-              displayKey="country"
-              onSelect={value => alert(value.country)}
+          <Dropdown
+            label='Your Country'
+            data={countries}
+            value={country}
+            onChangeText={text => setCountry(text)}
+            useNativeDriver={true}
           />
+          {selectedCountry ? (
+            <Dropdown
+            label='Your City'
+            data={cities}
+            value={city}
+            onChangeText={text => setCity(text)}
+            useNativeDriver={true}
+          />
+          ) : (
+            <Text></Text>
+          )}
           </View>
           <View>
             <Text style={styles.textTop}>Address</Text>
@@ -141,9 +185,7 @@ const Edit = ({ navigation }) => {
               style={styles.input}
               placeholder="Input Address"
               autoCapitalize={"none"}
-              value={address}
-              onChangeText={(text) => setAddress(text)}
-
+              value={`${city}, ${country}`}
               returnKeyType="next"
             />
           </View>
