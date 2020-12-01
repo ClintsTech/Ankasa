@@ -43,7 +43,7 @@ export const getAllMessages = (socket) => {
 	return (dispatch) => {
 		// dispatch(clearAllItems())
 		socket.on('refresh-chat',(res)=>{
-		   console.log(res)
+		//    console.log(res)
 		   dispatch(getAllMessage(res))
 	   })
 	}	

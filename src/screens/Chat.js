@@ -27,6 +27,7 @@ const Chat = ({navigation, route}) => {
   // const [id, setId] = React.useState(1);
   
   const { id } = route.params
+  // alert(id)
   // const [chat, setChat] = React.useState('');
   const [message, setMessage] = React.useState('');
   const dispatch = useDispatch();
@@ -44,9 +45,9 @@ const Chat = ({navigation, route}) => {
       console.log(res);
       dispatch(sendingMessageSuccess(res));
     });
-    return () => {
-      socket.disconnect();
-    };
+    // return () => {
+    //   socket.disconnect();
+    // };
   }, []);
 
   const onSubmit = () => {
