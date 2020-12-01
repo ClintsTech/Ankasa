@@ -995,6 +995,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
+"@notifee/react-native@^0.15.1":
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/@notifee/react-native/-/react-native-0.15.1.tgz#33ade678759fbd011bcb9689d3132d3a8cd5d04a"
+  integrity sha512-CfQ3libXhaq8D75eaiftAAOYjMexAAxNIIOMZ5GCx/xPNqYtsr3qjZ+sb+3t3zTMZyRqtRhqMSXysLpOpNRfpg==
+
 "@react-native-community/async-storage@^1.12.1":
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.12.1.tgz#25f821b4f6b13abe005ad67e47c6f1cee9f27b24"
@@ -1180,6 +1185,11 @@
   dependencies:
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
+
+"@react-native-firebase/messaging@^10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-10.1.0.tgz#adbeaae52db5c2aea2f61a98490bd107dd444e97"
+  integrity sha512-g8lDlkxcA/0AXtfx79DQiELtvX9z81mskxEA0wJLEd1QetP1sQsvIvoMzHIsj8Zzj3+Gn0Hz+qFcz/pJJ8ceRQ==
 
 "@react-navigation/bottom-tabs@^5.11.2":
   version "5.11.2"
@@ -6209,6 +6219,11 @@ react-native-dropdown-autocomplete-textinput@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-dropdown-autocomplete-textinput/-/react-native-dropdown-autocomplete-textinput-1.0.1.tgz#253699d131936b4993dd9b457f8f2c763155d8b2"
   integrity sha512-jIvzHWY3i92POBzpRbD3mvTc8lzWF+q22kBzAUquXAL6r+cgGd51YPS6E8T4VScS4eLP/j0u4Z+9vblkip1Jdg==
+
+react-native-fingerprint-scanner@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-fingerprint-scanner/-/react-native-fingerprint-scanner-6.0.0.tgz#ecb47ad0682d2a66a5e126d2b9e4d95e73c8dbf2"
+  integrity sha512-8VoKSA0Z0kWnIni96yABZfUUzfmWFXQEXcELwWr1CNLloPt3WoPptYb/6pGsBcH0YxSsW3X4+C8tl0clgyBsvA==
 
 react-native-gesture-handler@^1.9.0:
   version "1.9.0"

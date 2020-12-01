@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, StatusBar, Alert, ToastAndroid, Image } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import Back from '../assets/icons/btnback.svg'
-import Input from '../components/input'
 import { RectButton, TouchableOpacity } from 'react-native-gesture-handler'
 import style from '../helpers'
-import CheckBox from '@react-native-community/checkbox'
-import Eye from '../assets/icons/view 1.svg'
+import FingerprintScanner from 'react-native-fingerprint-scanner';
 
 const Fingerprint = ({ navigation }) => {
     const [toggleCheckBox, setToggleCheckBox] = useState(false)

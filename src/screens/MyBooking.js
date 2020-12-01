@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBooking } from '../redux/actions/booking'
 import moment from 'moment'
 import 'moment/locale/en-gb'
+import { Button } from 'react-native-paper';
 moment.locale('en-gb')
 
 const MyBooking = ({ navigation }) => {
@@ -100,6 +101,30 @@ const MyBooking = ({ navigation }) => {
     </RectButton>
   );
 
+  if(!isLogin) {
+    return (
+      <>
+        <StatusBar />
+        <ScrollView style={{backgroundColor: 'white', height: '100%'}}>
+          <View style={{paddingBottom: 30}}>
+            <View
+              style={{
+                paddingVertical: 30,
+                marginLeft: 20,
+                marginRight: 20,
+                flexDirection: 'row',
+              }}>
+              <Text style={{fontSize: 40, fontWeight: 'bold'}}>My Booking</Text>
+            </View>
+            <Button onPress={() => navigation.navigate('Login')}>
+              <Text>Login</Text>
+            </Button>
+          </View>
+        </ScrollView>
+      </>
+    )
+  }
+
   return (
     <>
       <StatusBar
@@ -117,7 +142,7 @@ const MyBooking = ({ navigation }) => {
             <Text style={{fontSize: 36, color: '#000', fontWeight: 'bold'}}>My Booking</Text>
             {isLogin ? (
                 <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity onPress={()=>navigation.navigate('Chat')}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Room')}>
                         <Mail width={24} height={24} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.navigate('Notifications')}>

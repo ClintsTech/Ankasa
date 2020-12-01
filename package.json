@@ -10,12 +10,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@notifee/react-native": "^0.15.1",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/checkbox": "^0.5.6",
     "@react-native-community/datetimepicker": "^3.0.6",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/picker": "^1.8.1",
     "@react-native-firebase/app": "^10.1.0",
+    "@react-native-firebase/messaging": "^10.1.0",
     "@react-navigation/bottom-tabs": "^5.11.2",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
@@ -24,6 +26,7 @@
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-dropdown-autocomplete-textinput": "^1.0.1",
+    "react-native-fingerprint-scanner": "^6.0.0",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-global-props": "^1.1.5",
     "react-native-image-picker": "^2.3.4",

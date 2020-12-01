@@ -53,7 +53,7 @@ const Home = ({ navigation }) => {
                             <Text style={{fontSize: 36, color: '#000', fontWeight: 'bold'}}>Explore</Text>
                             {isLogin ? (
                                 <View style={{flexDirection: 'row'}}>
-                                    <TouchableOpacity onPress={()=>navigation.navigate('Chat')}>
+                                    <TouchableOpacity onPress={()=>navigation.navigate('Room')}>
                                         <Mail width={24} height={24} />
                                     </TouchableOpacity>
                                     <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.navigate('Notifications')}>

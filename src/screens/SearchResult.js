@@ -11,8 +11,6 @@ import {
   Dimensions
 } from "react-native";
 import Plane from "../assets/images/Plane.png";
-import arrowLeftWhite from "../assets/icons/arrowLeftWhite.svg";
-import arrowWhite from "../assets/icons/arrowWhite.svg";
 import arrow from "../assets/icons/arrow.svg";
 import SmallPlane from "../assets/icons/smallPlane.svg";
 import Transfer from '../assets/icons/transfer-white.svg'

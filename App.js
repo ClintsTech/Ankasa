@@ -18,10 +18,6 @@ const styles = StyleSheet.create({
 });
 
 const App = () => {
-  React.useEffect(() => {
-    SplashScreen.hide();
-  }, []);
-
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

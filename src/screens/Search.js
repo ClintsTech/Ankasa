@@ -24,25 +24,38 @@ const Search = ({ navigation }) => {
     tomorrow.setDate(tomorrow.getDate() + 1)
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [date, setDate] = useState(tomorrow)
+    const tomorrowDate = new Date(date)
+    tomorrowDate.setDate(tomorrowDate.getDate() + 1)
+    const [isDatePickerArriveVisible, setDatePickerArriveVisibility] = useState(false);
+    const [dateArrive, setDateArrive] = useState(tomorrowDate)
     const [checked, setChecked] = React.useState('Economy')
     const [travel, setTravel] = useState(1)
     const [child, setChild] = useState('1')
     const [adult, setAdult] = useState('1')
     const [childInput, setChildInput] = useState(false)
     const [adultInput, setAdultInput] = useState(false)
+    const [switched, setSwitch] = useState(false)
+    const [transit, setTransit] = useState(false)
     const { country } = useSelector(state => state.search)
     const { data } = useSelector(state => state.user)
 
     const handleConfirm = (date) => {
         setDate(date)
-        console.log()
+        const arriveDate = new Date(date)
+        arriveDate.setDate(arriveDate.getDate() + 1)
+        setDateArrive(arriveDate)
         setDatePickerVisibility(false)
     };
 
+    const handleTransit = (date) => {
+        setDateArrive(date)
+        setDatePickerArriveVisibility(false)
+    }
+
     const onSubmit = () => {
         const dataForm = {
-            city_departure: data.city,
-            city_arrived: country.city,
+            city_departure: switched ? country.city : data.city,
+            city_arrived: switched ? data.city : country.city,
             departure: moment(date).format(moment.HTML5_FMT.DATE),
             classs: checked,
             seat: parseInt(child) + parseInt(adult)
@@ -55,8 +68,8 @@ const Search = ({ navigation }) => {
                 child: parseInt(child),
                 adult: parseInt(adult)
             },
-            city_departure: data,
-            city_arrived: country,
+            city_departure: switched ? data : country,
+            city_arrived: switched ? country : data,
         }))
         console.log(dataForm)
         navigation.navigate('SearchResult')
@@ -79,24 +92,24 @@ const Search = ({ navigation }) => {
                     <View style={styles.card}>
                         <View>
                             <Text style={{color: style.darkGrey, marginBottom: 7}}>From</Text>
-                            <Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>{data.city}</Text>
-                            <Text style={{color: style.darkGrey, marginTop: 4}}>{data.country}</Text>
+                            <Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>{switched ? country.city : data.city}</Text>
+                            <Text style={{color: style.darkGrey, marginTop: 4}}>{switched ? country.country : data.country}</Text>
                         </View>
-                        <View>
+                        <TouchableOpacity onPress={() => setSwitch(!switched)}>
                             <Transfer />
-                        </View>
+                        </TouchableOpacity>
                         <View>
                             <Text style={{color: style.darkGrey, marginBottom: 7}}>To</Text>
-                            <Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>{country.city}</Text>
-                            <Text style={{color: style.darkGrey, marginTop: 4}}>{country.country}</Text>
+                            <Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>{switched ? data.city : country.city}</Text>
+                            <Text style={{color: style.darkGrey, marginTop: 4}}>{switched ? data.country : country.country}</Text>
                         </View>
                     </View>
                     <View style={{paddingHorizontal: 28, flexDirection: 'row', justifyContent: 'space-between', marginTop: 60, marginBottom: 20}}>
-                        <RectButton onPress={() => setTravel(1)} style={[styles.button, { backgroundColor: travel === 1 ? style.primary : style.grey}]}>
+                        <RectButton onPress={() => {setTravel(1); setTransit(false)}} style={[styles.button, { backgroundColor: travel === 1 ? style.primary : style.grey}]}>
                             <Plane />
                             <Text style={{fontSize: 16, color: travel === 1 ? style.white : style.dark, fontWeight: 'bold', marginLeft: 14}}>One way</Text>
                         </RectButton>
-                        <RectButton onPress={() => setTravel(2)} style={[styles.button, { backgroundColor: travel === 2 ? style.primary : style.grey, marginLeft: 16}]}>
+                        <RectButton onPress={() => {setTravel(2); setTransit(true)}} style={[styles.button, { backgroundColor: travel === 2 ? style.primary : style.grey, marginLeft: 16}]}>
                             <Round />
                             <Text style={{fontSize: 16, color: travel === 2 ? style.white : style.dark, fontWeight: 'bold', marginLeft: 14}}>Round Trip</Text>
                         </RectButton>
@@ -109,6 +122,15 @@ const Search = ({ navigation }) => {
                             <IconRight />
                         </TouchableOpacity>     
                     </View>
+                    {transit ? (
+                        <View style={{paddingHorizontal: 28, marginBottom: 20}}>
+                            <Text style={{color: style.darkGrey, fontSize: 16, fontWeight: '900', marginBottom: 10}}>Arrive</Text>
+                            <TouchableOpacity onPress={() => setDatePickerArriveVisibility(true)} style={styles.btndate}>
+                                <Text style={{color: style.dark, fontWeight: 'bold'}}>{moment(dateArrive).format('dddd') + ', ' + moment(dateArrive).format('LL')}</Text>
+                                <IconRight />
+                            </TouchableOpacity>     
+                        </View>
+                    ) : <Text></Text>}
                     <View style={{paddingHorizontal: 28, marginBottom: 20}}>
                         <Text style={{color: style.darkGrey, fontSize: 16, fontWeight: '900', marginBottom: 10}}>How many person?</Text>
                         <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
@@ -120,6 +142,7 @@ const Search = ({ navigation }) => {
                                     onChangeText={text => setChild(text)}
                                     keyboardType="numeric"
                                     onSubmitEditing={() => setChildInput(false)}
+                                    onBlur={() => setChildInput(false)}
                                 />
                             ) : (
                                 <Text style={{color: style.dark, fontWeight: 'bold'}}>{child} Child</Text>
@@ -134,6 +157,7 @@ const Search = ({ navigation }) => {
                                     onChangeText={text => setAdult(text)}
                                     keyboardType="numeric"
                                     onSubmitEditing={() => setAdultInput(false)}
+                                    onBlur={() => setAdultInput(false)}
                                 />
                             ) : (
                                 <Text style={{color: style.dark, fontWeight: 'bold'}}>{adult} Adult</Text>
@@ -181,12 +205,19 @@ const Search = ({ navigation }) => {
                         </RectButton>
                     </View>
                     </ScrollView>
-                    <DateTimePicker
+                        <DateTimePicker
                             isVisible={isDatePickerVisible}
                             mode="date"
                             onConfirm={handleConfirm}
                             onCancel={() => setDatePickerVisibility(false)}
                             minimumDate={tomorrow}
+                        />
+                        <DateTimePicker
+                            isVisible={isDatePickerArriveVisible}
+                            mode="date"
+                            onConfirm={handleTransit}
+                            onCancel={() => setDatePickerArriveVisibility(false)}
+                            minimumDate={tomorrowDate}
                         />
                 </View>
             </ScrollView>

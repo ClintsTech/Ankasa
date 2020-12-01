@@ -14,12 +14,15 @@ import FlightDetail from '../screens/FlightDetail'
 import BookingDetail from '../screens/BookingDetail'
 import SearchResult from '../screens/SearchResult'
 import Edit from '../screens/EditProfile'
+import Room from '../screens/RoomChat'
+import Fingerprint from '../screens/Fingerprint';
+
 import ProfileLogo from '../assets/icons/user.svg'
 import CalendarLogo from '../assets/icons/calendar.svg'
 import ProfileLogoActive from '../assets/icons/useractive.svg'
 import CalendarLogoActive from '../assets/icons/calendaractive.svg'
 import Explore from '../assets/icons/explore.svg'
-import Fingerprint from '../screens/Fingerprint';
+import RoomChat from '../screens/RoomChat';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -165,6 +168,7 @@ export const PrivateRoute = () => {
       <Stack.Screen name="SearchResult" component={SearchResult} options={{headerShown: false}} />
       <Stack.Screen name="Notifications" component={Notifications} options={{headerShown: false}} />
       <Stack.Screen name="Chat" component={Chat} options={{headerShown: false}} />
+      <Stack.Screen name="Room" component={RoomChat} options={{headerShown: false}} />
       <Stack.Screen name="FlightDetail" component={FlightDetail} options={{headerShown: false}} />
       <Stack.Screen name="BookingDetail" component={BookingDetail} options={{headerShown: false}} />
       <Stack.Screen name="Edit" component={Edit} options={{headerShown: false}} />
