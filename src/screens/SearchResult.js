@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,7 +11,7 @@ import {
   Dimensions
 } from "react-native";
 import Plane from "../assets/images/Plane.png";
-import arrow from "../assets/icons/arrow.svg";
+import Arrow from "../assets/icons/arrow.svg";
 import SmallPlane from "../assets/icons/smallPlane.svg";
 import Transfer from '../assets/icons/transfer-white.svg'
 import style from '../helpers'
@@ -21,16 +21,32 @@ import { getFlight } from '../redux/actions/flights'
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment'
 import 'moment/locale/en-gb'
+import { Modal, Portal } from "react-native-paper";
+import CheckBox from '@react-native-community/checkbox'
+import { RectButton } from "react-native-gesture-handler";
 moment.locale('en-gb')
 
 const SearchResult = ({navigation}) => {
+  const [visible, setVisible] = useState(false);
+  const [snack, setSnack] = useState(false)
+  const [wifi, setWifi] = useState(false)
+  const [toilet, setToilet] = useState(false)
+  const [garuda, setGaruda] = useState(false)
+  const [lion, setLion] = useState(false)
+  const [air, setAir] = useState(false)
+  const [filter, setFilter] = useState(false)
 
   const dispatch = useDispatch()
   const { dataForm, data } = useSelector(state => state.search)
+  const [dataFilter, setDataFilter] = useState(data)
 
   const onClick = (id) => {
     dispatch(getFlight(id))
     navigation.navigate('FlightDetail')
+  }
+
+  const onFilter = () => {
+    setFilter(true)
   }
 
   const renderItem = ({item, index}) => {
@@ -113,22 +129,129 @@ const SearchResult = ({navigation}) => {
           <Text style={styles.type}>{data.length} flight found</Text>
         </View>
         <View style={{marginBottom: 10}}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setVisible(true)} style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text style={styles.filters}>Filter</Text>
-            <Image source={arrow} style={styles.arrow} />
+            <Arrow />
           </TouchableOpacity>
         </View>
         </View>
         <View style={{paddingHorizontal: 20}}>
         <FlatList
             showsVerticalScrollIndicator={false}
-            data={data}
+            data={filter ? dataFilter : data}
             keyExtractor={(item) => item.flight_id}
             renderItem={renderItem}
           />
         </View>
       </View>
     </ScrollView>
+    <Portal>
+      <Modal visible={visible} onDismiss={() => setVisible(false)} contentContainerStyle={styles.modal}>
+        <ScrollView>
+        <Text style={{fontSize: 16, color: style.dark, fontWeight: 'bold', marginBottom: 7}}>Facilities</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 10,
+          }}>
+          <CheckBox
+            disabled={false}
+            value={snack}
+            onValueChange={(value) => setSnack(value)}
+            tintColors={style.primary}
+          />
+          <Text style={{color: style.dark, fontSize: 16}}>
+            Snack
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 10,
+          }}>
+          <CheckBox
+            disabled={false}
+            value={wifi}
+            onValueChange={(value) => setWifi(value)}
+            tintColors={style.primary}
+          />
+          <Text style={{color: style.dark, fontSize: 16}}>
+            Wifi
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 10,
+          }}>
+          <CheckBox
+            disabled={false}
+            value={toilet}
+            onValueChange={(value) => setToilet(value)}
+            tintColors={style.primary}
+          />
+          <Text style={{color: style.dark, fontSize: 16}}>
+            Toilet
+          </Text>
+        </View>
+        <Text style={{fontSize: 16, color: style.dark, fontWeight: 'bold', marginBottom: 7}}>Airlines</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 10,
+          }}>
+          <CheckBox
+            disabled={false}
+            value={garuda}
+            onValueChange={(value) => setGaruda(value)}
+            tintColors={style.primary}
+          />
+          <Text style={{color: style.dark, fontSize: 16}}>
+            Garuda Indonesia
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 10,
+          }}>
+          <CheckBox
+            disabled={false}
+            value={air}
+            onValueChange={(value) => setAir(value)}
+            tintColors={style.primary}
+          />
+          <Text style={{color: style.dark, fontSize: 16}}>
+            Air Asia
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 10,
+          }}>
+          <CheckBox
+            disabled={false}
+            value={lion}
+            onValueChange={(value) => setLion(value)}
+            tintColors={style.primary}
+          />
+          <Text style={{color: style.dark, fontSize: 16}}>
+            Lion Air
+          </Text>
+        </View>
+        <RectButton onPress={onFilter} style={{backgroundColor: style.primary, paddingHorizontal: 30, paddingVertical: 15, borderRadius: 12}}>
+          <Text style={{color: style.white, fontSize: 16, fontWeight: 'bold', textAlign: 'center'}}>Filter</Text>
+        </RectButton>
+        </ScrollView>
+      </Modal>
+    </Portal>
   </>
   );
 };
@@ -138,6 +261,13 @@ export default SearchResult;
 const styles = StyleSheet.create({
   body: {
     backgroundColor: "#fff"
+  },
+  modal: {
+    paddingHorizontal: 28,
+    backgroundColor: style.white,
+    marginHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 10
   },
   cardHeader: {
     backgroundColor: "#2395FF",
@@ -266,13 +396,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 30,
     justifyContent: "flex-end",
-    marginTop: -16,
     right: 20
   },
   filters: {
     fontWeight: "bold",
-    marginVertical: -3,
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    fontSize: 16
   },
   detail1: {
     flex: 3,

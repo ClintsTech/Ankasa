@@ -157,11 +157,9 @@ const Edit = ({ navigation }) => {
             />
           </View>
           <View>
-
-          <Text style={styles.textTop}>Country</Text>
           
           <Dropdown
-            label='Your Country'
+            label='Country'
             data={countries}
             value={country}
             onChangeText={text => setCountry(text)}
@@ -169,7 +167,7 @@ const Edit = ({ navigation }) => {
           />
           {selectedCountry ? (
             <Dropdown
-            label='Your City'
+            label='City'
             data={cities}
             value={city}
             onChangeText={text => setCity(text)}
