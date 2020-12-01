@@ -1,4 +1,4 @@
-import { GET_COUNTRY, FORM_FILL, SEARCH } from '../type/search'
+import { GET_COUNTRY, FORM_FILL, SEARCH, SEARCH_FAILED } from '../type/search'
 import axios from 'axios'
 import { URI } from '../../utils'
 
@@ -15,7 +15,7 @@ export const search = (data, dataform) => async dispatch => {
         const res = await axios.post(`${URI}/flight/search-flight`, data)
         dispatch({ type: SEARCH, payload: res.data.data })
     } catch (error) {
-        console.log(error.message)
+        dispatch({ type: SEARCH_FAILED })
     }
 }
 

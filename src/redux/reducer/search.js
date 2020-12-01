@@ -1,4 +1,4 @@
-import { GET_COUNTRY, FORM_FILL, SEARCH } from '../type/search'
+import { GET_COUNTRY, FORM_FILL, SEARCH, SEARCH_FAILED } from '../type/search'
 
 const initialState = {
     country: '',
@@ -17,6 +17,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 data: action.payload
+            }
+        case SEARCH_FAILED:
+            return {
+                ...state,
+                data: [],
+                message: 'Flight Not Found'
             }
         case FORM_FILL:
             return {

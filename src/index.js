@@ -18,7 +18,7 @@ const MainNavigator = () => {
               'Notification caused app to open from background state:',
               remoteMessage.notification,
             );
-            navigation.navigate(remoteMessage.data.type);
+            navigation.navigate('Notifications');
           });
 
         messaging()

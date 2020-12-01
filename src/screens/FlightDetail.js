@@ -33,7 +33,8 @@ const FlightDetail = ({ navigation }) => {
   const onSubmit = () => {
     dispatch(postBooking({
       flight_id: data.flight_id,
-      seat: dataForm.passengger.child + dataForm.passengger.adult
+      seat: dataForm.passengger.child + dataForm.passengger.adult,
+      fee: data.price * (dataForm.passengger.child + dataForm.passengger.adult)
     }, token))
 
     navigation.replace("MyBooking")
@@ -69,7 +70,7 @@ const FlightDetail = ({ navigation }) => {
               </View>
 
               <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-              <Image source={{uri: data.logo}} style={{width: 75, height: 42.75}}/>
+              <Image source={{uri: data.logo}} style={{width: 75, height: 42.75, resizeMode: 'cover'}}/>
                 <View style={{flexDirection: 'column', justifyContent: 'center'}}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Rating />

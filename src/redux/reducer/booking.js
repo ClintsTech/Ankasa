@@ -1,8 +1,9 @@
-import { POST_BOOKING, GET_BOOKING } from '../type/booking'
+import { POST_BOOKING, GET_BOOKING, SPESIFIC_BOOKING } from '../type/booking'
 
 const initialState = {
     message: '',
-    dataBooking: []
+    dataBooking: [],
+    specificBooking: {}
 }
 
 export default (state = initialState, action) => {
@@ -16,6 +17,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 dataBooking: action.payload
+            }
+        case SPESIFIC_BOOKING:
+            return {
+                ...state,
+                specificBooking: action.payload
             }
         default:
             return state
