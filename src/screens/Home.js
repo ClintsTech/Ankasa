@@ -15,11 +15,16 @@ const Home = ({ navigation }) => {
     const dispatch = useDispatch()
     const { isLogin } = useSelector(state => state.auth)
     const { destination } = useSelector(state => state.destination)
+    const { data } = useSelector(state => state.user)
     const [query, setQuery] = useState('')
 
     useEffect(() => {
         dispatch(getDestination())
     }, [])
+
+    const navigatorChat = () =>{
+        data.role == 6 ? navigation.navigate('Room'):navigation.navigate('Chat', {id:data.id})
+    }
 
     const renderItems = ({ item, index }) => {
         return (
@@ -53,7 +58,7 @@ const Home = ({ navigation }) => {
                             <Text style={{fontSize: 36, color: '#000', fontWeight: 'bold'}}>Explore</Text>
                             {isLogin ? (
                                 <View style={{flexDirection: 'row'}}>
-                                    <TouchableOpacity onPress={()=>navigation.navigate('Room')}>
+                                    <TouchableOpacity onPress={navigatorChat}>
                                         <Mail width={24} height={24} />
                                     </TouchableOpacity>
                                     <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.navigate('Notifications')}>

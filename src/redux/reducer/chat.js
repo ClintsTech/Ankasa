@@ -2,11 +2,13 @@ import {
     SEND_MESSAGE_REQUEST,
     SEND_MESSAGE_SUCCESS,
     SEND_MESSAGE_FAILED,
-    GET_ALL_MESSAGE
+    GET_ALL_MESSAGE,
+    GET_LAST_MESSAGE
 } from '../type/chat'
 const initialState ={
     message:'',
     allMessage:[],
+    lastMessage:{},
     error:'',
     loading:false,
 }
@@ -36,6 +38,12 @@ export default ( state = initialState, action ) =>{
                 ...state,
                 loading:false,
                 allMessage:action.item
+            }
+        case GET_LAST_MESSAGE:
+            return {
+                ...state,
+                loading:false,
+                lastMessage:action.payload
             }
     
         default:

@@ -14,7 +14,7 @@ import FlightDetail from '../screens/FlightDetail'
 import BookingDetail from '../screens/BookingDetail'
 import SearchResult from '../screens/SearchResult'
 import Edit from '../screens/EditProfile'
-import Room from '../screens/RoomChat'
+// import Room from '../screens/RoomChat'
 import Fingerprint from '../screens/Fingerprint';
 
 import ProfileLogo from '../assets/icons/user.svg'
