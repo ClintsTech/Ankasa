@@ -35,19 +35,24 @@ const RoomChat = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
+      <>
+
       <RectButton
         onPress={() => navigation.navigate('Chat', {id:item.id})}
         style={styles.detail}>
+
         <View style={styles.detail1}>
-          <View style={styles.person}>
+
+      <View style={{flexDirection: 'row', flex: 1}}>
+
+        <View style={styles.person}>
             <Image
               source={{uri: imageURI + item.photo}}
               style={{
-                width: 100,
-                height: 150,
-                // alignSelf: 'center',
+                width: 50,
+                height: 50,
                 borderRadius: 10,
-                flex: 1,
+
               }}
             />
             {/* {console.log(imageURI + item.photo)} */}
@@ -56,12 +61,18 @@ const RoomChat = ({navigation}) => {
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.message1}>{item.message}</Text>
           </View>
+
+      </View>
+
           <View style={styles.time}>
             <Text style={styles.time1}>{item.time}</Text>
             <Viewmessage width={20} height={20} style={styles.Viewmessage} />
           </View>
+
         </View>
       </RectButton>
+
+      </>
     );
   };
 
@@ -111,6 +122,9 @@ const RoomChat = ({navigation}) => {
 export default RoomChat;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 10
+  },
   scrollView: {
     height: '100%',
     backgroundColor: style.white,
@@ -165,17 +179,14 @@ const styles = StyleSheet.create({
     width:'100%'
   },
   detail1: {
-    flex: 3,
+    flex: 2,
     flexDirection: 'row',
     marginTop: 0,
-    justifyContent: 'center',
     color: '#fff',
-    
   },
   person: {
-    right: 65,
     marginTop: 10,
-    
+    marginRight: 50
   },
   message: {
     right: 20,
@@ -192,8 +203,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   time: {
-    left: 60,
-    marginTop: 10,
+    paddingLeft: 5,
+    marginTop: 15,
   },
   time1: {
     fontSize: 10,
