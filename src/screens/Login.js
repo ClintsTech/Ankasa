@@ -25,11 +25,12 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [eye, setEye] = useState(true);
+  const { device_token } = useSelector(state => state.auth)
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    if (email && password) {
-      dispatch(login({email, password}));
+    if (email && password && device_token) {
+      dispatch(login({email, password, device_token}));
     }
   };
 

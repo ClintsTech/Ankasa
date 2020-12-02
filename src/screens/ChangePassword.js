@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, TextInput, StyleSheet, ToastAndroid, ScrollView} from 'react-native';
 import {RectButton, TouchableOpacity} from 'react-native-gesture-handler';
 import style from '../helpers';
@@ -17,6 +17,13 @@ const ChangePassword = ({navigation}) => {
   const [eye1, setEye1] = useState(true);
   const [eye2, setEye2] = useState(true);
   const { token } = useSelector(state => state.auth)
+  const { isEditSuccess } = useSelector(state => state.user)
+
+  useEffect(() => {
+    if(isEditSuccess) {
+      navigation.replace('Profile')
+    }
+  }, [isEditSuccess, dispatch])
 
   const onSubmit = () => {
     if(currentPassword && newPassword && newPassword === reapetPassword) {

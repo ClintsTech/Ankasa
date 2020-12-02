@@ -66,8 +66,7 @@ export default (state = initialState, action) => {
           rehydrated: true,
           version: -1,
         },
-        isAdmin: false,
-        device_token: '',
+        isAdmin: false
       };
     case TOKEN_DEVICE:
       return {

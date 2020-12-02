@@ -5,6 +5,7 @@ import { PrivateRoute, PublicRoute } from './navigator'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { getUser } from './redux/actions/user'
+import { deviceToken } from './redux/actions/login'
 import messaging from '@react-native-firebase/messaging'
 
 const MainNavigator = () => {
@@ -32,6 +33,10 @@ const MainNavigator = () => {
           setInitialRoute(initialRoute)
         }
       });
+
+      messaging().getToken().then((token) => {
+        dispatch(deviceToken(token))
+      })
     }, [])
 
     useEffect(() => {

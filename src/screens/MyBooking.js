@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ImageBackground,
   Text,
@@ -8,6 +8,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Linking,
+  ToastAndroid
 } from 'react-native';
 import Mail from '../assets/icons/mail.svg';
 import Bell from '../assets/icons/bell.svg';
@@ -15,17 +16,19 @@ import Plane from '../assets/icons/plane.svg';
 import Bg from './../assets/images/bg.png';
 import {RectButton, ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBooking, getBookingById } from '../redux/actions/booking'
+import { getBooking, getBookingById, payBooking } from '../redux/actions/booking'
 import moment from 'moment'
 import 'moment/locale/en-gb'
-import { Button } from 'react-native-paper';
+import { Button, Modal, Portal } from 'react-native-paper';
+import style from '../helpers'
 import { URI } from '../utils';
 moment.locale('en-gb')
 
 const MyBooking = ({ navigation }) => {
   const dispatch = useDispatch()
+  const [visible, setVisible] = useState(false);
   const { isLogin, token } = useSelector(state => state.auth)
-  const { dataBooking } = useSelector(state => state.booking)
+  const { dataBooking, pay } = useSelector(state => state.booking)
   const { data } = useSelector(state => state.user)
 
   useEffect(() => {
@@ -34,12 +37,13 @@ const MyBooking = ({ navigation }) => {
     }
   }, [])
 
-  const onClick = (id, isPaid) => {
+  const onClick = (id, isPaid, fee) => {
     if(isPaid) {
       dispatch(getBookingById(id, token))
       navigation.navigate('BookingDetail')
     } else {
-      Linking.openURL(`${URI}/payment`)
+      dispatch(payBooking(fee, id, token))
+      setVisible(true)
     }
   }
 
@@ -48,7 +52,7 @@ const MyBooking = ({ navigation }) => {
   }
 
   const renderItem = ({item}) => (
-    <RectButton onPress={() => onClick(item.id, item.isPaid)} style={{ marginBottom: 20}}>
+    <RectButton onPress={() => onClick(item.id, item.isPaid, item.fee)} style={{ marginBottom: 20}}>
       <ImageBackground
         source={Bg}
         style={{width: '100%', height: 230}}
@@ -208,8 +212,35 @@ const MyBooking = ({ navigation }) => {
       </View>
       </ScrollView>
       </SafeAreaView>
+      <Portal>
+          <Modal visible={visible} onDismiss={() => setVisible(false)} contentContainerStyle={styles.modal}>
+            <View style={{alignItems: 'center'}}>
+              <RectButton onPress={() => {
+                if(pay.redirect_url) {
+                  Linking.openURL(pay.redirect_url)
+                } else {
+                  ToastAndroid.show('Wait for a minute', ToastAndroid.SHORT)
+                }
+              }} style={{backgroundColor: style.primary, paddingHorizontal: 60, paddingVertical: 15, borderRadius: 10}}>
+                <Text style={{color: style.white, fontSize: 16, textAlign: 'center'}}>Pay</Text>
+              </RectButton>
+              <Text>if you cant pay copy this url to browser</Text>
+              <Text>{pay.redirect_url}</Text>
+            </View>
+          </Modal>
+        </Portal>
     </>
   );
 };
 
 export default MyBooking
+
+const styles = StyleSheet.create({
+  modal: {
+    paddingHorizontal: 28,
+    backgroundColor: style.white,
+    marginHorizontal: 20,
+    paddingVertical: 20,
+    borderRadius: 10
+  },
+})
