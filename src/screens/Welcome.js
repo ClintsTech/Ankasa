@@ -72,7 +72,7 @@ const Welcome = ({navigation}) => {
 
   return (
     <>
-      <StatusBar />
+    <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" /><StatusBar />
       <ScrollView style={{backgroundColor: '#FFFFFF', height: '100%'}}>
         <View contentInsetAdjustmentBehavior="automatic">
           <Carousel
