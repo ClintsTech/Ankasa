@@ -16,50 +16,49 @@ import Input from '../components/input';
 // ES6 import
 import {io} from 'socket.io-client';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-  getAllMessages,
-  sendingMessageSuccess,
-  postMessage,
-} from '../redux/actions/chat';
+// import {
+//   getAllMessages,
+//   sendingMessageSuccess,
+//   postMessage,
+// } from '../redux/actions/chat';
 import { baseURI } from '../utils'
 
 const Chat = ({navigation, route}) => {
-  // const [id, setId] = React.useState(1);
   
   const { id } = route.params
   // alert(id)
-  // const [chat, setChat] = React.useState('');
+  const [chat, setChat] = React.useState([]);
   const [message, setMessage] = React.useState('');
   const dispatch = useDispatch();
   const {allMessage} = useSelector((state) => state.chat);
   const { data } = useSelector((state) => state.user);
   const socket = io(baseURI, {query:{id}});
   
-  React.useEffect(() => {
+  const onSubmit = () => {
+    if(message){
+      const chatData = {
+        id_from: data.id,
+        id_to: data.role === 6? id:'1',
+        message: message,
+      };
+      socket.emit('postMessage', chatData)
+      setMessage('');
+    }
     
-    dispatch(getAllMessages(socket));
-    if (socket == null) return;
+  };
 
-    socket.on('postMessage', (res) => {
-      // setChat(result);
-      console.log(res);
-      dispatch(sendingMessageSuccess(res));
+  React.useEffect(() => {
+    if (socket == null) return;
+    socket.on('refresh-chat', (chat) => {
+      // alert(chat);
+      setChat(chat)
     });
     return () => {
-      socket.disconnect();
+      socket.off('refresh-chat');
     };
-  }, []);
+  }, [socket, chat, setChat]);
 
-  const onSubmit = () => {
-    // const id_user = id
-    const dataMessage = {
-      id_from: data.id,
-      id_to: data.role === 6? id:'1',
-      message: message,
-    };
-    dispatch(postMessage(socket, dataMessage));
-    setMessage('');
-  };
+
   const Item = ({message, time}) => (
     <View style={styles.message}>
       <Text style={{color: style.dark}}>{message}</Text>
@@ -101,8 +100,12 @@ const Chat = ({navigation, route}) => {
       <SafeAreaView>
         <View>
           <ScrollView style={styles.container}>
+            <View style={{alignSelf:"center", backgroundColor:style.darkGrey, padding:10, borderRadius:10, marginTop:20}}>
+
+            <Text style={{color:style.white}}>Ask customer service for your problem</Text>
+            </View>
             <FlatList
-              data={allMessage}
+              data={chat}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
             />
