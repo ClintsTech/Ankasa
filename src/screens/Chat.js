@@ -45,9 +45,9 @@ const Chat = ({navigation, route}) => {
       console.log(res);
       dispatch(sendingMessageSuccess(res));
     });
-    // return () => {
-    //   socket.disconnect();
-    // };
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const onSubmit = () => {

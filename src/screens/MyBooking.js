@@ -22,6 +22,7 @@ import 'moment/locale/en-gb'
 import { Button, Modal, Portal } from 'react-native-paper';
 import style from '../helpers'
 import { URI } from '../utils';
+import Clipboard from '@react-native-community/clipboard'
 moment.locale('en-gb')
 
 const MyBooking = ({ navigation }) => {
@@ -30,6 +31,7 @@ const MyBooking = ({ navigation }) => {
   const { isLogin, token } = useSelector(state => state.auth)
   const { dataBooking, pay } = useSelector(state => state.booking)
   const { data } = useSelector(state => state.user)
+  const [copiedText, setCopiedText] = useState('');
 
   useEffect(() => {
     if(isLogin) {
@@ -46,6 +48,15 @@ const MyBooking = ({ navigation }) => {
       setVisible(true)
     }
   }
+
+  const copyToClipboard = () => {
+    Clipboard.setString(pay.redirect_url);
+  };
+
+  const fetchCopiedText = async () => {
+    const text = await Clipboard.getString();
+    setCopiedText(text);
+  };
 
   const navigatorChat = () =>{
     data.role == 6 ? navigation.navigate('Room'):navigation.navigate('Chat', {id:data.id})
@@ -224,8 +235,14 @@ const MyBooking = ({ navigation }) => {
               }} style={{backgroundColor: style.primary, paddingHorizontal: 60, paddingVertical: 15, borderRadius: 10}}>
                 <Text style={{color: style.white, fontSize: 16, textAlign: 'center'}}>Pay</Text>
               </RectButton>
-              <Text>if you cant pay copy this url to browser</Text>
-              <Text>{pay.redirect_url}</Text>
+              <TouchableOpacity onPress={copyToClipboard}>
+                <Text>Click here to copy to Clipboard</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={fetchCopiedText}>
+                <Text>View copied text</Text>
+              </TouchableOpacity>
+
+              <Text style={styles.copiedText}>{copiedText}</Text>
             </View>
           </Modal>
         </Portal>
@@ -242,5 +259,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingVertical: 20,
     borderRadius: 10
+  },
+  copiedText: {
+    marginTop: 10,
+    color: 'red',
   },
 })

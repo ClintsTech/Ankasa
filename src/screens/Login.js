@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,7 +6,8 @@ import {
   ScrollView,
   SafeAreaView,
   StatusBar,
-  Linking
+  Linking,
+  ToastAndroid
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../redux/actions/login';
@@ -25,7 +26,7 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [eye, setEye] = useState(true);
-  const { device_token } = useSelector(state => state.auth)
+  const { device_token, error } = useSelector(state => state.auth)
   const dispatch = useDispatch();
 
   const onSubmit = () => {
@@ -33,6 +34,12 @@ const Login = ({navigation}) => {
       dispatch(login({email, password, device_token}));
     }
   };
+
+  useEffect(() => {
+    if(error) {
+      ToastAndroid.show(error, ToastAndroid.SHORT)
+    }
+  }, [dispatch, error])
 
   return (
     <>

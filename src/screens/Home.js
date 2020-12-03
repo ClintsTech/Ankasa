@@ -8,6 +8,7 @@ import Search from '../assets/icons/search.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import Carousel from 'react-native-snap-carousel';
 import { getDestination } from '../redux/actions/destination'
+import { getUser } from '../redux/actions/user'
 import { getCountry } from '../redux/actions/search'
 import More from '../assets/icons/more.svg'
 

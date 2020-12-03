@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
     case LOGIN_FAILED:
       return {
         ...state,
-        error: action.payload,
+        error: 'Login Failed',
         loading: false,
         isLogin: false,
         isAdmin: false,
