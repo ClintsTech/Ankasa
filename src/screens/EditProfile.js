@@ -99,7 +99,8 @@ const Edit = ({ navigation }) => {
   return (
     <>
     <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
-      <ScrollView style={styles.container}>
+      <ScrollView>
+      <View style={styles.container} > 
         <View>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={{marginRight: 20}}>
@@ -212,7 +213,10 @@ const Edit = ({ navigation }) => {
           </RectButton>
           </View>
         </View>
+
+        </View>
       </ScrollView>
+      
     </>
   );
 };
@@ -267,6 +271,6 @@ const styles = StyleSheet.create({
   settings: {
     flexDirection: "row",
     marginTop: 20,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
 });
