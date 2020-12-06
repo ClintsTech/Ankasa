@@ -75,7 +75,8 @@ Ankasa is a mobile app that develop to help passangers of airlines to travel aro
 ## Setup
 
 `yarn`
-`yarn android`
+
+<br/>`yarn android`
 
 ## Sources
 
