@@ -34,43 +34,43 @@ Ankasa is a mobile app that develop to help passangers of airlines to travel aro
 
 ### Splash Screen
 
-![Splash Screen](https://i.ibb.co/qNmFcb0/1-splash.jpg |width =100)
+![Splash Screen|512x397](https://i.ibb.co/qNmFcb0/1-splash.jpg )
 
 ### Explore
 
-![Explore](https://i.ibb.co/nDp36x8/2-explore.jpg |width =100)
+![Explore|512x397](https://i.ibb.co/nDp36x8/2-explore.jpg )
 
 ### Destination
 
-![Destination](https://i.ibb.co/16vcQVh/3-destination.jpg |width =100)
+![Destination](https://i.ibb.co/16vcQVh/3-destination.jpg )
 
 ### Search Flight
 
-![Search Flight](https://i.ibb.co/r679h6r/4-search.jpg |width =100)
+![Search Flight](https://i.ibb.co/r679h6r/4-search.jpg )
 
 ### Book Flight
 
-![Book Flight](https://i.ibb.co/Fbt1wXV/5-book-flight.jpg |width =100)
+![Book Flight](https://i.ibb.co/Fbt1wXV/5-book-flight.jpg )
 
 ### My Booking
 
-![My Booking](https://i.ibb.co/WKTQYdB/6-my-booking.jpg |width =100)
+![My Booking](https://i.ibb.co/WKTQYdB/6-my-booking.jpg )
 
 ### Payment Link
 
-![Payment Link](https://i.ibb.co/4js2G5j/7-linking-to-payment.jpg |width =100)
+![Payment Link](https://i.ibb.co/4js2G5j/7-linking-to-payment.jpg )
 
 ### Chat
 
-![Chat](https://i.ibb.co/KKzQvzg/4-chat.jpg |width =100)
+![Chat](https://i.ibb.co/KKzQvzg/4-chat.jpg )
 
 ### Notification
 
-![Notification](https://i.ibb.co/qm20xg3/5-notifikasi.jpg |width =100)
+![Notification](https://i.ibb.co/qm20xg3/5-notifikasi.jpg )
 
 ### Profile
 
-![Profile](https://i.ibb.co/tXdwydy/3-profile.jpg |width =100)
+![Profile](https://i.ibb.co/tXdwydy/3-profile.jpg )
 
 ## Setup
 
