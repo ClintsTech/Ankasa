@@ -34,43 +34,43 @@ Ankasa is a mobile app that develop to help passangers of airlines to travel aro
 
 ### Splash Screen
 
-![Splash Screen](https://i.ibb.co/qNmFcb0/1-splash.jpg)
+![Splash Screen](https://i.ibb.co/qNmFcb0/1-splash.jpg =250x250)
 
 ### Explore
 
-![Explore](https://i.ibb.co/nDp36x8/2-explore.jpg)
+![Explore](https://i.ibb.co/nDp36x8/2-explore.jpg =250x250)
 
 ### Destination
 
-![Destination](https://i.ibb.co/16vcQVh/3-destination.jpg)
+![Destination](https://i.ibb.co/16vcQVh/3-destination.jpg =250x250)
 
 ### Search Flight
 
-![Search Flight](https://i.ibb.co/r679h6r/4-search.jpg)
+![Search Flight](https://i.ibb.co/r679h6r/4-search.jpg =250x250)
 
 ### Book Flight
 
-![Book Flight](https://i.ibb.co/Fbt1wXV/5-book-flight.jpg)
+![Book Flight](https://i.ibb.co/Fbt1wXV/5-book-flight.jpg =250x250)
 
 ### My Booking
 
-![My Booking](https://i.ibb.co/WKTQYdB/6-my-booking.jpg)
+![My Booking](https://i.ibb.co/WKTQYdB/6-my-booking.jpg =250x250)
 
 ### Payment Link
 
-![Payment Link](https://i.ibb.co/4js2G5j/7-linking-to-payment.jpg)
+![Payment Link](https://i.ibb.co/4js2G5j/7-linking-to-payment.jpg =250x250)
 
 ### Chat
 
-![Chat](https://i.ibb.co/KKzQvzg/4-chat.jpg)
+![Chat](https://i.ibb.co/KKzQvzg/4-chat.jpg =250x250)
 
 ### Notification
 
-![Notification](https://i.ibb.co/qm20xg3/5-notifikasi.jpg)
+![Notification](https://i.ibb.co/qm20xg3/5-notifikasi.jpg =250x250)
 
 ### Profile
 
-![Profile](https://i.ibb.co/tXdwydy/3-profile.jpg)
+![Profile](https://i.ibb.co/tXdwydy/3-profile.jpg =250x250)
 
 ## Setup
 
