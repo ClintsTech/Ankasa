@@ -38,7 +38,7 @@ Ankasa is a mobile app that develop to help passangers of airlines to travel aro
 
 ### Explore
 
-![Explore|512x397](https://i.ibb.co/nDp36x8/2-explore.jpg )
+![Explore|100x100](https://i.ibb.co/nDp36x8/2-explore.jpg )
 
 ### Destination
 
